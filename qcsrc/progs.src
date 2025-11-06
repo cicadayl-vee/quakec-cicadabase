@@ -1,0 +1,54 @@
+../progs.dat	// default: ../progs.dat
+
+defs.qc
+subs.qc
+fight.qc
+ai.qc
+combat.qc
+blood.qc	// moved out of weapons.qc
+
+// items
+items/item_func.qc
+items/health.qc
+items/armor.qc
+items/ammo.qc
+items/keys.qc
+items/runes.qc
+items/powerups.qc
+items/backpack.qc
+
+// weapons
+weapons/axe.qc
+weapons/shotguns.qc
+weapons/nailguns.qc
+weapons/launchers.qc
+weapons/thunderbolt.qc
+weapons/weapon_use.qc
+
+impulse.qc
+world.qc
+client.qc
+obituary.qc
+player.qc
+monsters.qc
+doors.qc
+buttons.qc
+triggers.qc
+plats.qc
+misc.qc
+
+monsters/ogre.qc
+monsters/demon.qc
+monsters/shambler.qc
+monsters/knight.qc
+monsters/soldier.qc
+monsters/wizard.qc
+monsters/dog.qc
+monsters/zombie.qc
+monsters/boss.qc
+monsters/tarbaby.qc		// registered
+monsters/hknight.qc		// registered
+monsters/fish.qc		// registered
+monsters/shalrath.qc		// registered
+monsters/enforcer.qc		// registered
+monsters/oldone.qc		// registered
