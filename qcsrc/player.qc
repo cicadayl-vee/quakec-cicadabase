@@ -454,67 +454,6 @@ void() PlayerDead =
 	self.deadflag = DEAD_DEAD;
 };
 
-vector(float dm) VelocityForDamage =
-{
-	vector v;
-
-	v_x = 100 * crandom();
-	v_y = 100 * crandom();
-	v_z = 200 + 100 * random();
-
-	if (dm > -50)
-	{
-		//dprint("level 1\n");
-		v = v * 0.7;
-	}
-	else if (dm > -200)
-	{
-		//dprint("level 3\n");
-		v = v * 2;
-	}
-	else
-		v = v * 10;
-
-	return v;
-};
-
-void(string gibname, float dm) ThrowGib =
-{
-	entity new;
-
-	new = spawn();
-	new.origin = self.origin;
-	setmodel(new, gibname);
-	setsize(new, '0 0 0', '0 0 0');
-	new.velocity = VelocityForDamage(dm);
-	new.movetype = MOVETYPE_BOUNCE;
-	new.solid = SOLID_NOT;
-	new.avelocity_x = random() * 600;
-	new.avelocity_y = random() * 600;
-	new.avelocity_z = random() * 600;
-	new.think = SUB_Remove;
-	new.ltime = time;
-	new.nextthink = time + 10 + random() * 10;
-	new.frame = 0;
-	new.flags = 0;
-};
-
-void(string gibname, float dm) ThrowHead =
-{
-	setmodel(self, gibname);
-	self.frame = 0;
-	self.nextthink = -1;
-	self.movetype = MOVETYPE_BOUNCE;
-	self.takedamage = DAMAGE_NO;
-	self.solid = SOLID_NOT;
-	self.view_ofs = '0 0 8';
-	setsize(self, '-16 -16 0', '16 16 56');
-	self.velocity = VelocityForDamage(dm);
-	self.origin_z = self.origin_z - 24;
-	self.flags = self.flags - (self.flags & FL_ONGROUND);
-	self.avelocity = crandom() * '0 600 0';
-};
-
 void() GibPlayer =
 {
 	ThrowHead("progs/h_player.mdl", self.health);

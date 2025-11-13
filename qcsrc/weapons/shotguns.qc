@@ -17,11 +17,6 @@
     See file, 'COPYING', for details.
 */
 
-float() crandom =
-{
-	return 2 * (random() - 0.5);
-};
-
 /*============================================================================
 
 MULTI-DAMAGE
