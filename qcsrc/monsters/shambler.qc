@@ -350,6 +350,64 @@ void() sham_die =
 	sham_death1();
 };
 
+/*============================================================================
+
+ShamCheckAttack
+
+The player is in view, so decide to move or launch an attack
+Returns FALSE if movement should continue
+
+============================================================================*/
+float() ShamCheckAttack =
+{
+	vector spot1, spot2;
+	entity targ;
+
+	if (enemy_range == RANGE_MELEE)
+	{
+		if (CanDamage(self.enemy, self))
+		{
+			self.attack_state = AS_MELEE;
+			return TRUE;
+		}
+	}
+
+	if (time < self.attack_finished)
+		return FALSE;
+
+	if (!enemy_vis)
+		return FALSE;
+
+	targ = self.enemy;
+
+	// see if any entities are in the way of the shot
+	spot1 = self.origin + self.view_ofs;
+	spot2 = targ.origin + targ.view_ofs;
+
+	if (vlen(spot1 - spot2) > 600)
+		return FALSE;
+
+	traceline(spot1, spot2, FALSE, self);
+
+	// sight line crossed contents
+	if (trace_inopen && trace_inwater)
+		return FALSE;
+
+	// don't have a clear shot
+	if (trace_ent != targ)
+	{
+		return FALSE;
+	}
+
+	// missile attack
+	if (enemy_range == RANGE_FAR)
+		return FALSE;
+
+	self.attack_state = AS_MISSILE;
+	SUB_AttackFinished(2 + 2 * random());
+	return TRUE;
+};
+
 /*QUAKED monster_shambler (1 0 0) (-32 -32 -24) (32 32 64) Ambush
 */
 void() monster_shambler =

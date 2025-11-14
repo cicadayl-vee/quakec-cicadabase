@@ -262,6 +262,66 @@ void() army_die =
 		army_cdie1();
 };
 
+/*============================================================================
+
+SoldierCheckAttack
+
+The player is in view, so decide to move or launch an attack
+Returns FALSE if movement should continue
+
+============================================================================*/
+float() SoldierCheckAttack =
+{
+	vector spot1, spot2;
+	entity targ;
+	float chance;
+
+	targ = self.enemy;
+
+	// see if any entities are in the way of the shot
+	spot1 = self.origin + self.view_ofs;
+	spot2 = targ.origin + targ.view_ofs;
+
+	traceline(spot1, spot2, FALSE, self);
+
+	// sight line crossed contents
+	if (trace_inopen && trace_inwater)
+		return FALSE;
+
+	// don't have a clear shot
+	if (trace_ent != targ)
+		return FALSE;
+
+
+	// missile attack
+	if (time < self.attack_finished)
+		return FALSE;
+
+	if (enemy_range == RANGE_FAR)
+		return FALSE;
+
+	if (enemy_range == RANGE_MELEE)
+		chance = 0.9;
+	else if (enemy_range == RANGE_NEAR)
+		chance = 0.4;
+	else if (enemy_range == RANGE_MID)
+		chance = 0.05;
+	else
+		chance = 0;
+
+	if (random() < chance)
+	{
+		self.th_missile();
+		SUB_AttackFinished(1 + random());
+		if (random() < 0.3)
+			self.lefty = !self.lefty;
+
+		return TRUE;
+	}
+
+	return FALSE;
+};
+
 /*QUAKED monster_army (1 0 0) (-16 -16 -24) (16 16 40) Ambush
 */
 void() monster_army =
