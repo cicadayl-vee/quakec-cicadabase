@@ -2,10 +2,14 @@
 
 defs.qc
 subs.qc
-fight.qc
-ai.qc
-combat.qc
-blood.qc	// moved out of weapons.qc
+world.qc
+
+// combat
+combat/fight.qc
+combat/ai.qc
+combat/damage.qc	// originally called combat.qc
+combat/monsters.qc
+combat/blood.qc		// blood and gibs - moved from weapons and player code
 
 // items
 items/item_func.qc
@@ -24,19 +28,23 @@ weapons/nailguns.qc
 weapons/launchers.qc
 weapons/thunderbolt.qc
 weapons/weapon_use.qc
+weapons/impulse.qc
 
-impulse.qc
-world.qc
-client.qc
-obituary.qc
-player.qc
-monsters.qc
-doors.qc
-buttons.qc
-triggers.qc
-plats.qc
-misc.qc
+// func
+func/doors.qc
+func/buttons.qc
+func/intermission.qc
+func/triggers.qc
+func/plats.qc
+func/misc.qc
 
+// client
+client/spawn.qc
+client/rules.qc
+client/obituary.qc
+client/player.qc	// bulk of client was moved here
+
+// monsters
 monsters/ogre.qc
 monsters/demon.qc
 monsters/shambler.qc
@@ -46,9 +54,9 @@ monsters/wizard.qc
 monsters/dog.qc
 monsters/zombie.qc
 monsters/boss.qc
-monsters/tarbaby.qc		// registered
-monsters/hknight.qc		// registered
-monsters/fish.qc		// registered
-monsters/shalrath.qc		// registered
-monsters/enforcer.qc		// registered
-monsters/oldone.qc		// registered
+monsters/tarbaby.qc
+monsters/hknight.qc
+monsters/fish.qc
+monsters/shalrath.qc
+monsters/enforcer.qc
+monsters/oldone.qc
