@@ -43,6 +43,32 @@ float(entity e, float healamount, float ignore) T_Heal =
 	return 1;
 };
 
+/*============================================================================
+
+CheckHealthRot
+
+Checks for taking off health points from a player that recently used a Mega-Health.
+
+============================================================================*/
+void CheckHealthRot() 
+{
+	if (!(self.items & IT_SUPERHEALTH)) 
+		return;
+
+	if (self.healthrot_nextcheck > time)
+		return;
+
+	if (self.health > self.max_health) 
+	{
+		self.health = self.health - 1;
+		self.healthrot_nextcheck = time + 1;
+		return;
+	}
+
+	self.items = self.items - (self.items & IT_SUPERHEALTH);
+	self.healthrot_nextcheck = 0;
+};
+
 float H_ROTTEN = 1;
 float H_MEGA = 2;
 .float healamount, healtype;
