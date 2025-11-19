@@ -17,6 +17,10 @@
     See file, 'COPYING', for details.
 */
 
+void() DecodeLevelParms;
+void() PlayerDie;
+void() set_suicide_frame;
+
 void(entity attacker, float damage) player_pain;
 void() player_stand1;
 
@@ -83,34 +87,46 @@ void() DecodeLevelParms =
 	self.armortype = parm9 * 0.01;
 };
 
-void() set_suicide_frame;
+/*============================================================================
 
-// called by ClientKill and DeadThink
-void() respawn =
+ClientConnect
+
+called when a player connects to a server
+
+============================================================================*/
+void() ClientConnect =
 {
-	if (coop)
-	{
-		// make a copy of the dead body for appearances sake
-		CopyToBodyQue(self);
-		// get the spawn parms as they were at level start
-		setspawnparms(self);
-		// respawn
-		PutClientInServer();
-	}
-	else if (deathmatch)
-	{
-		// make a copy of the dead body for appearances sake
-		CopyToBodyQue(self);
-		// set default spawn parms
-		SetNewParms();
-		// respawn
-		PutClientInServer();
-	}
-	else
-	{
-		// restart the entire server
-		localcmd("restart\n");
-	}
+	bprint(self.netname);
+	bprint(" entered the game\n");
+	
+	self.killbind_count = 0;
+
+	// a client connecting during an intermission can cause problems
+	if (intermission_running)
+		ExitIntermission();
+};
+
+/*============================================================================
+
+ClientDisconnect
+
+Called when a player disconnects from a server
+
+============================================================================*/
+void() ClientDisconnect =
+{
+	// if the level end trigger has been activated, just return
+	// since they aren't *really* leaving
+	if (gameover)
+		return;
+
+	// let everyone else know
+	bprint(self.netname);
+	bprint(" left the game with ");
+	bprint(ftos(self.frags));
+	bprint(" frags\n");
+	sound(self, CHAN_BODY, "player/tornoff2.wav", 1, ATTN_NONE);
+	set_suicide_frame();
 };
 
 /*============================================================================
@@ -321,9 +337,6 @@ entity() SelectSpawnPoint =
 	return spot;
 };
 
-void() DecodeLevelParms;
-void() PlayerDie;
-
 /*============================================================================
 
 PutClientInServer
@@ -397,44 +410,91 @@ void() PutClientInServer =
 	spawn_tdeath(self.origin, self);
 };
 
-/*============================================================================
-
-ClientConnect
-
-called when a player connects to a server
-
-============================================================================*/
-void() ClientConnect =
+// called by ClientKill and DeadThink
+void() respawn =
 {
-	bprint(self.netname);
-	bprint(" entered the game\n");
-	
-	self.killbind_count = 0;
-
-	// a client connecting during an intermission can cause problems
-	if (intermission_running)
-		ExitIntermission();
+	if (coop)
+	{
+		// make a copy of the dead body for appearances sake
+		CopyToBodyQue(self);
+		// get the spawn parms as they were at level start
+		setspawnparms(self);
+		// respawn
+		PutClientInServer();
+	}
+	else if (deathmatch)
+	{
+		// make a copy of the dead body for appearances sake
+		CopyToBodyQue(self);
+		// set default spawn parms
+		SetNewParms();
+		// respawn
+		PutClientInServer();
+	}
+	else
+	{
+		// restart the entire server
+		localcmd("restart\n");
+	}
 };
 
-/*============================================================================
-
-ClientDisconnect
-
-Called when a player disconnects from a server
-
-============================================================================*/
-void() ClientDisconnect =
+/*
+go to the next level for deathmatch
+*/
+void() NextLevel =
 {
-	// if the level end trigger has been activated, just return
-	// since they aren't *really* leaving
-	if (gameover)
-		return;
+	entity o;
 
-	// let everyone else know
-	bprint(self.netname);
-	bprint(" left the game with ");
-	bprint(ftos(self.frags));
-	bprint(" frags\n");
-	sound(self, CHAN_BODY, "player/tornoff2.wav", 1, ATTN_NONE);
-	set_suicide_frame();
+	if (mapname == "start")
+	{
+		if (!cvar("registered"))
+		{
+			mapname = "e1m1";
+		}
+		else if (!(serverflags & 1))
+		{
+			mapname = "e1m1";
+			serverflags = serverflags | 1;
+		}
+		else if (!(serverflags & 2))
+		{
+			mapname = "e2m1";
+			serverflags = serverflags | 2;
+		}
+		else if (!(serverflags & 4))
+		{
+			mapname = "e3m1";
+			serverflags = serverflags | 4;
+		}
+		else if (!(serverflags & 8))
+		{
+			mapname = "e4m1";
+			serverflags = serverflags - 7;
+		}
+
+		o = spawn();
+		o.map = mapname;
+	}
+	else
+	{
+		// find a trigger changelevel
+		o = find(world, classname, "trigger_changelevel");
+
+		// go back to start if no trigger_changelevel
+		if (!o)
+		{
+			mapname = "start";
+			o = spawn();
+			o.map = mapname;
+		}
+	}
+
+	nextmap = o.map;
+	gameover = TRUE;
+	
+	if (o.nextthink < time)
+	{
+		o.think = execute_changelevel;
+		o.nextthink = time + 0.1;
+	}
 };
