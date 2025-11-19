@@ -23,67 +23,6 @@ RULES
 
 ============================================================================*/
 
-/*
-go to the next level for deathmatch
-*/
-void() NextLevel =
-{
-	entity o;
-
-	if (mapname == "start")
-	{
-		if (!cvar("registered"))
-		{
-			mapname = "e1m1";
-		}
-		else if (!(serverflags & 1))
-		{
-			mapname = "e1m1";
-			serverflags = serverflags | 1;
-		}
-		else if (!(serverflags & 2))
-		{
-			mapname = "e2m1";
-			serverflags = serverflags | 2;
-		}
-		else if (!(serverflags & 4))
-		{
-			mapname = "e3m1";
-			serverflags = serverflags | 4;
-		}
-		else if (!(serverflags & 8))
-		{
-			mapname = "e4m1";
-			serverflags = serverflags - 7;
-		}
-
-		o = spawn();
-		o.map = mapname;
-	}
-	else
-	{
-		// find a trigger changelevel
-		o = find(world, classname, "trigger_changelevel");
-
-		// go back to start if no trigger_changelevel
-		if (!o)
-		{
-			mapname = "start";
-			o = spawn();
-			o.map = mapname;
-		}
-	}
-
-	nextmap = o.map;
-	gameover = TRUE;
-	
-	if (o.nextthink < time)
-	{
-		o.think = execute_changelevel;
-		o.nextthink = time + 0.1;
-	}
-};
-
 /*============================================================================
 
 CheckRules
