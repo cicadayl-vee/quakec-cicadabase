@@ -19,6 +19,18 @@
 
 /*============================================================================
 
+ServerflagsCommand
+
+Just for development
+
+============================================================================*/
+void() ServerflagsCommand =
+{
+	serverflags = serverflags * 2 + 1;
+};
+
+/*============================================================================
+
 W_ChangeWeapon
 
 ============================================================================*/
@@ -172,7 +184,14 @@ void() CycleWeaponCommand =
 	}
 };
 
-void() CycleWeaponBack =
+/*============================================================================
+
+CycleWeaponReverseCommand
+
+Go to the prev weapon with ammo
+
+============================================================================*/
+void() CycleWeaponReverseCommand =
 {
 	float it, am;
 
@@ -241,10 +260,10 @@ void() CycleWeaponBack =
 
 /*============================================================================
 
-CheatCommand
+WeaponsCheat
 
 ============================================================================*/
-void() CheatCommand =
+void() WeaponsCheat =
 {
 	if (deathmatch || coop)
 		return;
@@ -292,14 +311,26 @@ void() QuadCheat =
 
 /*============================================================================
 
-ServerflagsCommand
-
-Just for development
+OmnicideCheat
 
 ============================================================================*/
-void() ServerflagsCommand =
+void() OmnicideCheat =
 {
-	serverflags = serverflags * 2 + 1;
+	entity head;
+
+	if (deathmatch || coop)
+		return;
+	
+	head = nextent(world);
+	while (head != world)
+	{
+		if ((head.health > 0) && (head.flags & FL_MONSTER))
+			T_Damage(head, world, world, (head.health * 3));
+		
+		head = nextent(head);
+	}
+	
+	dprint("omnicide cheat\n");
 };
 
 /*============================================================================
@@ -309,20 +340,25 @@ ImpulseCommands
 ============================================================================*/
 void() ImpulseCommands =
 {
+	// weapon switching
 	if (self.impulse >= 1 && self.impulse <= 8)
 		W_ChangeWeapon();
-
-	if (self.impulse == 9)
-		CheatCommand();
 	if (self.impulse == 10)
 		CycleWeaponCommand();
-	if (self.impulse == 11)
-		ServerflagsCommand();
 	if (self.impulse == 12)
-		CycleWeaponBack();
-
+		CycleWeaponReverseCommand();
+	
+	// cheats
+	if (self.impulse == 9)
+		WeaponsCheat();
 	if (self.impulse == 255)
 		QuadCheat();
+	if (self.impulse == 205)
+		OmnicideCheat();
+	
+	// dev
+	if (self.impulse == 11)
+		ServerflagsCommand();
 
 	self.impulse = 0;
 };
