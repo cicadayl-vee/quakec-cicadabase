@@ -306,6 +306,8 @@ void() QuadCheat =
 	self.super_time = 1;
 	self.super_damage_finished = time + 30;
 	self.items = self.items | IT_QUAD;
+	sound(self, CHAN_VOICE, "items/damage.wav", 1, ATTN_NORM);
+	
 	dprint("quad cheat\n");
 };
 
