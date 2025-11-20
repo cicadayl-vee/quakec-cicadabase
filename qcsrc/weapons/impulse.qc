@@ -267,10 +267,7 @@ void() WeaponsCheat =
 {
 	if (deathmatch || coop)
 		return;
-
-	self.ammo_rockets = 100;
-	self.ammo_nails = 200;
-	self.ammo_shells = 100;
+	
 	self.items = self.items |
 		IT_AXE |
 		IT_SHOTGUN |
@@ -279,14 +276,18 @@ void() WeaponsCheat =
 		IT_SUPER_NAILGUN |
 		IT_GRENADE_LAUNCHER |
 		IT_ROCKET_LAUNCHER |
-		IT_KEY1 | IT_KEY2;
-
+		IT_LIGHTNING;
+	
+	self.ammo_rockets = 100;
+	self.ammo_nails = 200;
+	self.ammo_shells = 100;
 	self.ammo_cells = 100;
-	self.items = self.items | IT_LIGHTNING;
 	
 	self.armortype = 0.8;
 	self.armorvalue = 200;
 	self.items = self.items - (self.items & (IT_ARMOR1 | IT_ARMOR2 | IT_ARMOR3)) + IT_ARMOR3;
+	
+	self.items = self.items | IT_KEY1 | IT_KEY2;
 
 	self.weapon = IT_ROCKET_LAUNCHER;
 	self.impulse = 0;
