@@ -2,6 +2,7 @@
 
 defs.qc
 subs.qc
+precache.qc
 world.qc
 
 // combat
