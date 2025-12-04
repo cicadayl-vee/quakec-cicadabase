@@ -32,11 +32,15 @@ weapons/weapon_use.qc
 weapons/impulse.qc
 
 // func
+func/walls.qc
 func/doors.qc
 func/buttons.qc
+func/plats.qc
 func/intermission.qc
 func/triggers.qc
-func/plats.qc
+func/traps.qc
+func/lights.qc
+func/ambient.qc
 func/misc.qc
 
 // client
