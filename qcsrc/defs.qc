@@ -853,7 +853,7 @@ void() SUB_Null;
 void() SUB_UseTargets;
 void() SUB_Remove;
 
-// combat.qc
+// damage.qc
 void(entity targ, entity inflictor, entity attacker, float damage) T_Damage;
 
 // health function
