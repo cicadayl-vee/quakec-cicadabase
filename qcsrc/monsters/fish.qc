@@ -165,7 +165,7 @@ void() fish_die =
 		ThrowGib("progs/gib2.mdl", self.health);
 		ThrowGib("progs/gib3.mdl", self.health);
 		self.think = SUB_Remove;
-		self.nextthink= time + 0.1;
+		self.nextthink = time;
 		return;
 	}
 
