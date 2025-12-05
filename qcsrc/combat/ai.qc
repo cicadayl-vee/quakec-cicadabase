@@ -363,6 +363,10 @@ float() FindTarget =
 {
 	entity client;
 	float r;
+	float intermission_running;
+	
+	if (intermission_running) 
+		return FALSE;
 
 	// if the first spawnflag bit is set, the monster will only wake up on
 	// really seeing the player, not another monster getting angry
