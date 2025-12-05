@@ -23,6 +23,7 @@ void() knight_walk1;
 void() knight_bow6;
 void() knight_bow1;
 void(entity etemp, entity stemp, entity stemp, float dmg) T_Damage;
+float intermission_running;
 
 /*============================================================================
 
@@ -363,7 +364,6 @@ float() FindTarget =
 {
 	entity client;
 	float r;
-	float intermission_running;
 	
 	if (intermission_running) 
 		return FALSE;
