@@ -200,6 +200,7 @@ void() sound_item_precache =
 	precache_sound("weapons/lock4.wav");	// ammo pick up
 	precache_sound("weapons/pkup.wav");	// weapon up
 	precache_sound("items/armor1.wav");	// armor up
+	precache_sound("items/damage.wav");	// quad damage
 	precache_sound("items/damage2.wav");	// quad damage
 	precache_sound("items/damage3.wav");	// quad damage
 };
