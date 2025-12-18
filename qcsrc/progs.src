@@ -36,6 +36,7 @@ func/walls.qc
 func/doors.qc
 func/buttons.qc
 func/plats.qc
+func/trains.qc
 func/intermission.qc
 func/triggers.qc
 func/traps.qc
