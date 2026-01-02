@@ -99,7 +99,7 @@ void() wiz_side1;
 WizardCheckAttack
 
 =============================================================================*/
-void() WizardCheckAttack =
+float() WizardCheckAttack =
 {
 	vector spot1, spot2;
 	entity targ;
