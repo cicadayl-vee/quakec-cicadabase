@@ -170,9 +170,6 @@ void() sound_ccode_precache =
 
 	precache_sound("ambience/water1.wav");
 	precache_sound("ambience/wind2.wav");
-
-	precache_sound("demon/dland2.wav");	// landing thud
-	precache_sound("misc/h2ohit1.wav");	// landing splash
 };
 
 void() sound_ccode_physics_precache =
