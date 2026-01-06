@@ -17,8 +17,81 @@
     See file, 'COPYING', for details.
 */
 
-void() spike_touch;
-void() superspike_touch;
+.float hit_z;
+
+void() spike_touch =
+{
+	if (other == self.owner)
+		return;
+
+	// trigger field, do nothing
+	if (other.solid == SOLID_TRIGGER)
+		return;
+
+	if (pointcontents(self.origin) == CONTENT_SKY)
+	{
+		remove(self);
+		return;
+	}
+
+	// hit something that bleeds
+	if (other.takedamage)
+	{
+		spawn_touchblood(9);
+		other.deathtype = "nail";
+		T_Damage(other, self, self.owner, 9);
+	}
+	else
+	{
+		WriteByte(MSG_BROADCAST, SVC_TEMPENTITY);
+
+		if (self.classname == "wizspike")
+			WriteByte(MSG_BROADCAST, TE_WIZSPIKE);
+		else if (self.classname == "knightspike")
+			WriteByte(MSG_BROADCAST, TE_KNIGHTSPIKE);
+		else
+			WriteByte(MSG_BROADCAST, TE_SPIKE);
+		WriteCoord(MSG_BROADCAST, self.origin_x);
+		WriteCoord(MSG_BROADCAST, self.origin_y);
+		WriteCoord(MSG_BROADCAST, self.origin_z);
+	}
+
+	remove(self);
+};
+
+void() superspike_touch =
+{
+	if (other == self.owner)
+		return;
+
+	// trigger field, do nothing
+	if (other.solid == SOLID_TRIGGER)
+		return;
+
+	if (pointcontents(self.origin) == CONTENT_SKY)
+	{
+		remove(self);
+		return;
+	}
+
+	// hit something that bleeds
+	if (other.takedamage)
+	{
+		spawn_touchblood(18);
+		other.deathtype = "supernail";
+		T_Damage(other, self, self.owner, 18);
+	}
+	else
+	{
+		WriteByte(MSG_BROADCAST, SVC_TEMPENTITY);
+		WriteByte(MSG_BROADCAST, TE_SUPERSPIKE);
+		WriteCoord(MSG_BROADCAST, self.origin_x);
+		WriteCoord(MSG_BROADCAST, self.origin_y);
+		WriteCoord(MSG_BROADCAST, self.origin_z);
+	}
+
+	remove(self);
+};
 
 /*============================================================================
 
@@ -97,84 +170,4 @@ void(float ox) W_FireSpikes =
 	launch_spike(self.origin + '0 0 16' + v_right * ox, dir);
 
 	self.punchangle_x = -2;
-};
-
-
-//=============================================================================
-
-
-.float hit_z;
-
-void() spike_touch =
-{
-	if (other == self.owner)
-		return;
-
-	// trigger field, do nothing
-	if (other.solid == SOLID_TRIGGER)
-		return;
-
-	if (pointcontents(self.origin) == CONTENT_SKY)
-	{
-		remove(self);
-		return;
-	}
-
-	// hit something that bleeds
-	if (other.takedamage)
-	{
-		spawn_touchblood(9);
-		other.deathtype = "nail";
-		T_Damage(other, self, self.owner, 9);
-	}
-	else
-	{
-		WriteByte(MSG_BROADCAST, SVC_TEMPENTITY);
-
-		if (self.classname == "wizspike")
-			WriteByte(MSG_BROADCAST, TE_WIZSPIKE);
-		else if (self.classname == "knightspike")
-			WriteByte(MSG_BROADCAST, TE_KNIGHTSPIKE);
-		else
-			WriteByte(MSG_BROADCAST, TE_SPIKE);
-		WriteCoord(MSG_BROADCAST, self.origin_x);
-		WriteCoord(MSG_BROADCAST, self.origin_y);
-		WriteCoord(MSG_BROADCAST, self.origin_z);
-	}
-
-	remove(self);
-};
-
-void() superspike_touch =
-{
-	if (other == self.owner)
-		return;
-
-	// trigger field, do nothing
-	if (other.solid == SOLID_TRIGGER)
-		return;
-
-	if (pointcontents(self.origin) == CONTENT_SKY)
-	{
-		remove(self);
-		return;
-	}
-
-	// hit something that bleeds
-	if (other.takedamage)
-	{
-		spawn_touchblood(18);
-		other.deathtype = "supernail";
-		T_Damage(other, self, self.owner, 18);
-	}
-	else
-	{
-		WriteByte(MSG_BROADCAST, SVC_TEMPENTITY);
-		WriteByte(MSG_BROADCAST, TE_SUPERSPIKE);
-		WriteCoord(MSG_BROADCAST, self.origin_x);
-		WriteCoord(MSG_BROADCAST, self.origin_y);
-		WriteCoord(MSG_BROADCAST, self.origin_z);
-	}
-
-	remove(self);
 };
