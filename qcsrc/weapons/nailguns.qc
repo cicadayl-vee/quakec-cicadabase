@@ -17,8 +17,6 @@
     See file, 'COPYING', for details.
 */
 
-.float hit_z;
-
 void() spike_touch =
 {
 	if (other == self.owner)
