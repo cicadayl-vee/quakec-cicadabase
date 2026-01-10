@@ -46,8 +46,6 @@ $frame shake1 shake2 shake3 shake4 shake5 shake6 shake7 shake8
 $frame shake9 shake10 shake11 shake12 shake12_2 shake13 shake14
 $frame shake15 shake16 shake17 shake18 shake19 shake20
 
-//void() old_stand = [ $old1, old_stand ] {};
-
 void() old_idle1 = [ $old1,  old_idle2 ] {};
 void() old_idle2 = [ $old2,  old_idle3 ] {};
 void() old_idle3 = [ $old3,  old_idle4 ] {};
