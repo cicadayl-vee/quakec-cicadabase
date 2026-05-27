@@ -23,15 +23,9 @@ SIMPLE BMODELS
 
 ============================================================================*/
 
-void() func_wall_use =
-{
-	// change to alternate textures
-	self.frame = 1 - self.frame;
-};
+// change to alternate textures
+void() func_wall_use = { self.frame = 1 - self.frame; };
 
-/*QUAKED func_wall (0 .5 .8) ?
-This is just a solid wall if not inhibitted
-*/
 void() func_wall =
 {
 	self.angles = '0 0 0';
@@ -42,22 +36,14 @@ void() func_wall =
 	setmodel(self, self.model);
 };
 
-/*QUAKED func_illusionary (0 .5 .8) ?
-A simple entity that looks solid but lets you walk through it.
-*/
 void() func_illusionary =
 {
 	self.angles = '0 0 0';
 	self.movetype = MOVETYPE_NONE;
 	self.solid = SOLID_NOT;
 	setmodel(self, self.model);
-	// Playing it safe and removing the makestatic call without the params instead of adding self
-	//makestatic();
 };
 
-/*QUAKED func_episodegate (0 .5 .8) ? E1 E2 E3 E4
-This bmodel will appear if the episode has already been completed, so players can't reenter it.
-*/
 void() func_episodegate =
 {
 	// can still enter episode
@@ -72,9 +58,6 @@ void() func_episodegate =
 	setmodel(self, self.model);
 };
 
-/*QUAKED func_bossgate (0 .5 .8) ?
-This bmodel appears unless players have all of the episode sigils.
-*/
 void() func_bossgate =
 {
 	// all episodes completed

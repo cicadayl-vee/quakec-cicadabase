@@ -23,19 +23,6 @@ OLD ONE
 
 ============================================================================*/
 
-$cd id1/models/old_one
-$origin 0 0 24
-$base base
-$skin skin
-$scale 1
-
-void() finale_1;
-void() finale_2;
-void() finale_3;
-void() finale_4;
-
-entity shub;
-
 $frame old1 old2 old3 old4 old5 old6 old7 old8 old9
 $frame old10 old11 old12 old13 old14 old15 old16 old17 old18 old19
 $frame old20 old21 old22 old23 old24 old25 old26 old27 old28 old29
@@ -119,6 +106,8 @@ void() old_thrash17 = [ $shake17, old_thrash18 ] { lightstyle(0, "c"); };
 void() old_thrash18 = [ $shake18, old_thrash19 ] { lightstyle(0, "b"); };
 void() old_thrash19 = [ $shake19, old_thrash20 ] { lightstyle(0, "a"); };
 void() old_thrash20 = [ $shake20, old_thrash20 ] { finale_4(); };
+
+entity shub;
 
 void() finale_1 =
 {
@@ -252,8 +241,6 @@ void() finale_4 =
 	lightstyle(0, "m");
 };
 
-/*QUAKED monster_oldone (1 0 0) (-16 -16 -24) (16 16 32)
-*/
 void() monster_oldone =
 {
 	if (deathmatch)

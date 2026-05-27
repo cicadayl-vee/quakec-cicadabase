@@ -17,9 +17,6 @@
     See file, 'COPYING', for details.
 */
 
-void() train_next;
-void() func_train_find;
-
 void() train_blocked =
 {
 	if (time < self.attack_finished)
@@ -83,16 +80,6 @@ void() func_train_find =
 	}
 };
 
-/*QUAKED func_train (0 .5 .8) ?
-Trains are moving platforms that players can ride.
-The targets origin specifies the min point of the train at each corner.
-The train spawns at the first target it is pointing at.
-If the train is the target of a button or trigger, it will not begin moving until activated.
-speed default 100
-dmg default 2
-sounds
-1) ratchet metal
-*/
 void() func_train =
 {
 	if (!self.speed)
@@ -135,9 +122,6 @@ void() func_train =
 	self.think = func_train_find;
 };
 
-/*QUAKED misc_teleporttrain (0 .5 .8) (-8 -8 -8) (8 8 8)
-This is used for the final bos
-*/
 void() misc_teleporttrain =
 {
 	if (!self.speed)

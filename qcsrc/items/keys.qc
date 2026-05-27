@@ -65,16 +65,6 @@ void() key_setsounds =
 	}
 };
 
-/*QUAKED item_key1 (0 .5 .8) (-16 -16 -24) (16 16 32)
-SILVER key
-In order for keys to work
-you MUST set your maps
-worldtype to one of the
-following:
-0: medieval
-1: metal
-2: base
-*/
 void() item_key1 =
 {
 	if (world.worldtype == 0)
@@ -95,23 +85,16 @@ void() item_key1 =
 		setmodel(self, "progs/b_s_key.mdl");
 		self.netname = "silver keycard";
 	}
+	
 	key_setsounds();
+	
 	self.touch = key_touch;
 	self.items = IT_KEY1;
 	setsize(self, '-16 -16 -24', '16 16 32');
+	
 	StartItem();
 };
 
-/*QUAKED item_key2 (0 .5 .8) (-16 -16 -24) (16 16 32)
-GOLD key
-In order for keys to work
-you MUST set your maps
-worldtype to one of the
-following:
-0: medieval
-1: metal
-2: base
-*/
 void() item_key2 =
 {
 	if (world.worldtype == 0)
@@ -132,9 +115,12 @@ void() item_key2 =
 		setmodel(self, "progs/b_g_key.mdl");
 		self.netname = "gold keycard";
 	}
+	
 	key_setsounds();
+	
 	self.touch = key_touch;
 	self.items = IT_KEY2;
 	setsize(self, '-16 -16 -24', '16 16 32');
+	
 	StartItem();
 };

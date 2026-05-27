@@ -26,24 +26,6 @@ When it decides it can't attack, it goes into hunt mode.
 
 ============================================================================*/
 
-float(float v) anglemod;
-
-void() knight_atk1;
-void() knight_runatk1;
-void() ogre_smash1;
-void() ogre_swing1;
-
-void() sham_smash1;
-void() sham_swingr1;
-void() sham_swingl1;
-
-float() DemonCheckAttack;
-void(float side) Demon_Melee;
-
-void(vector dest) ChooseTurn;
-
-void() ai_face;
-
 float enemy_vis, enemy_infront, enemy_range;
 float enemy_yaw;
 
@@ -68,6 +50,7 @@ The player is in view, so decide to move or launch an attack
 Returns FALSE if movement should continue
 
 ============================================================================*/
+
 float() CheckAttack =
 {
 	vector spot1, spot2;
@@ -152,15 +135,12 @@ ai_face
 Stay facing the enemy
 
 ============================================================================*/
+
 void() ai_face =
 {
 	self.ideal_yaw = vectoyaw(self.enemy.origin - self.origin);
 	ChangeYaw();
 };
-
-float(entity targ) visible;
-float(entity targ) infront;
-float(entity targ) range;
 
 /*============================================================================
 
@@ -169,6 +149,11 @@ ai_charge
 The monster is in a melee attack, so get as close as possible to .enemy
 
 ============================================================================*/
+
+float(entity targ) visible;
+float(entity targ) infront;
+float(entity targ) range;
+
 void(float d) ai_charge =
 {
 	ai_face();
@@ -197,6 +182,7 @@ void() ai_charge_side =
 ai_melee
 
 ============================================================================*/
+
 void() ai_melee =
 {
 	vector delta;

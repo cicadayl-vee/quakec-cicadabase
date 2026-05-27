@@ -23,11 +23,6 @@ OGRE
 
 ============================================================================*/
 
-$cd id1/models/ogre_c
-$origin 0 0 24
-$base base
-$skin base
-
 $frame stand1 stand2 stand3 stand4 stand5 stand6 stand7 stand8 stand9
 
 $frame walk1 walk2 walk3 walk4 walk5 walk6 walk7
@@ -63,6 +58,8 @@ $frame bdeath1 bdeath2 bdeath3 bdeath4 bdeath5 bdeath6
 $frame bdeath7 bdeath8 bdeath9 bdeath10
 
 $frame pull1 pull2 pull3 pull4 pull5 pull6 pull7 pull8 pull9 pull10 pull11
+
+//============================================================================
 
 void() OgreGrenadeExplode =
 {
@@ -104,6 +101,7 @@ void() OgreGrenadeTouch =
 OgreFireGrenade
 
 ============================================================================*/
+
 void() OgreFireGrenade =
 {
 	entity missile;
@@ -140,9 +138,10 @@ void() OgreFireGrenade =
 
 /*============================================================================
 
-chainsaw
+Chainsaw
 
 ============================================================================*/
+
 void(float side) chainsaw =
 {
 	vector delta;
@@ -473,6 +472,7 @@ The player is in view, so decide to move or launch an attack
 Returns FALSE if movement should continue
 
 ============================================================================*/
+
 float() OgreCheckAttack =
 {
 	vector spot1, spot2;
@@ -531,8 +531,6 @@ float() OgreCheckAttack =
 	return TRUE;
 };
 
-/*QUAKED monster_ogre (1 0 0) (-32 -32 -24) (32 32 64) Ambush
-*/
 void() monster_ogre =
 {
 	if (deathmatch)
@@ -540,6 +538,7 @@ void() monster_ogre =
 		remove(self);
 		return;
 	}
+	
 	precache_model("progs/ogre.mdl");
 	precache_model("progs/h_ogre.mdl");
 	precache_model("progs/grenade.mdl");

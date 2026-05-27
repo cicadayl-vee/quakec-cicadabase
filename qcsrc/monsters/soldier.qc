@@ -23,11 +23,6 @@ SOLDIER
 
 ============================================================================*/
 
-$cd id1/models/soldier3
-$origin 0 -6 24
-$base base
-$skin skin
-
 $frame stand1 stand2 stand3 stand4 stand5 stand6 stand7 stand8
 
 $frame death1 death2 death3 death4 death5 death6 death7 death8
@@ -54,7 +49,7 @@ $frame prowl_1 prowl_2 prowl_3 prowl_4 prowl_5 prowl_6 prowl_7 prowl_8
 $frame prowl_9 prowl_10 prowl_11 prowl_12 prowl_13 prowl_14 prowl_15 prowl_16
 $frame prowl_17 prowl_18 prowl_19 prowl_20 prowl_21 prowl_22 prowl_23 prowl_24
 
-void() army_fire;
+//============================================================================
 
 void() army_stand1 = [ $stand1, army_stand2 ] { ai_stand(); };
 void() army_stand2 = [ $stand2, army_stand3 ] { ai_stand(); };
@@ -270,6 +265,7 @@ The player is in view, so decide to move or launch an attack
 Returns FALSE if movement should continue
 
 ============================================================================*/
+
 float() SoldierCheckAttack =
 {
 	vector spot1, spot2;
@@ -322,8 +318,6 @@ float() SoldierCheckAttack =
 	return FALSE;
 };
 
-/*QUAKED monster_army (1 0 0) (-16 -16 -24) (16 16 40) Ambush
-*/
 void() monster_army =
 {
 	if (deathmatch)
@@ -331,6 +325,7 @@ void() monster_army =
 		remove(self);
 		return;
 	}
+	
 	precache_model("progs/soldier.mdl");
 	precache_model("progs/h_guard.mdl");
 	precache_model("progs/gib1.mdl");

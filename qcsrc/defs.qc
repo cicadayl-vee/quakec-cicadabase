@@ -526,6 +526,9 @@ float AS_SLIDING = 2;
 float AS_MELEE = 3;
 float AS_MISSILE = 4;
 
+// zombies
+.float inpain;
+
 /*============================================================================
 
 PLAYER ONLY FIELDS
@@ -578,6 +581,13 @@ PLAYER ONLY FIELDS
 
 // keeps track of how many times the player used the kill command
 .float killbind_count;
+
+// spawning
+float IDEAL_DIST_FROM_DM_SPAWN_POINT = 384;
+float MIN_DIST_FROM_DM_SPAWN_POINT = 84;
+
+// drowning dmg
+.float dmgtime;
 
 /*============================================================================
 
@@ -677,6 +687,14 @@ SOUNDS
 .float waitmin, waitmax;
 .float distance;
 .float volume;
+
+/*============================================================================
+
+ITEMS
+
+============================================================================*/
+
+.float healamount, healtype;
 
 /*============================================================================
 
@@ -845,20 +863,170 @@ string(string s) precache_file2 = #77;
 // for coop respawn
 void(entity e) setspawnparms = #78;
 
+//============================================================================
+
 // subs.qc
 void(vector tdest, float tspeed, void() func) SUB_CalcMove;
-void(entity ent, vector tdest, float tspeed, void() func) SUB_CalcMoveEnt;
 void(vector destangle, float tspeed, void() func) SUB_CalcAngleMove;
 void() SUB_CalcMoveDone;
 void() SUB_CalcAngleMoveDone;
-void() SUB_Null;
 void() SUB_UseTargets;
 void() SUB_Remove;
+float(entity targ) visible;
+
+// world.qc
+void() InitBodyQue;
+void() InitLightStyles;
+
+// fight.qc
+float(float v) anglemod;
+void(vector dest) ChooseTurn;
+void() ai_face;
+float(entity targ, entity inflictor) CanDamage;
+float() DemonCheckAttack;
+void(float side) Demon_Melee;
+void() knight_atk1;
+void() knight_runatk1;
+void() ogre_smash1;
+void() ogre_swing1;
+void() sham_smash1;
+void() sham_swingr1;
+void() sham_swingl1;
+
+// ai.qc
+void() movetarget_f;
+void() t_movetarget;
+void(entity targ, entity inflictor, entity attacker, float damage) T_Damage;
+void() knight_walk1;
+void() knight_bow6;
+void() knight_bow1;
+float() WizardCheckAttack;
+float() DogCheckAttack;
+float() SoldierCheckAttack;
+float() ShamCheckAttack;
+float() OgreCheckAttack;
 
 // damage.qc
-void(entity targ, entity inflictor, entity attacker, float damage) T_Damage;
+void() T_MissileTouch;
+void() info_player_start;
+void(entity targ, entity attacker) ClientObituary;
+void() monster_death_use;
 
-// health function
-float(entity e, float healamount, float ignore) T_Heal;
+// item_func.qc
+void() W_SetCurrentAmmo;
 
-float(entity targ, entity inflictor) CanDamage;
+// health.qc
+void() health_touch;
+
+// ammo.qc
+float() W_BestWeapon;
+
+// weapon_use.qc
+void() player_run;
+void() player_axe1;
+void() player_axeb1;
+void() player_axec1;
+void() player_axed1;
+void() player_shot1;
+void() player_nail1;
+void() player_light1;
+void() player_rocket1;
+void() ImpulseCommands;
+
+// doors.qc
+void() door_go_down;
+void() door_go_up;
+void() fd_secret_move1;
+void() fd_secret_move2;
+void() fd_secret_move3;
+void() fd_secret_move4;
+void() fd_secret_move5;
+void() fd_secret_move6;
+void() fd_secret_done;
+
+// buttons.qc
+void() button_wait;
+void() button_return;
+
+// plats.qc
+void() plat_center_touch;
+void() plat_outside_touch;
+void() plat_trigger_use;
+void() plat_go_up;
+void() plat_go_down;
+void() plat_crush;
+
+// trains.qc
+void() train_next;
+void() func_train_find;
+
+// traps.qc
+void(vector org, vector vec) LaunchLaser;
+
+// lights.qc
+void() FireAmbient;
+
+// misc.qc
+void() fire_fly;
+void() fire_touch;
+void() make_bubbles;
+void() bubble_remove;
+void() bubble_bob;
+
+// spawn.qc
+void() DecodeLevelParms;
+void() PlayerDie;
+void() set_suicide_frame;
+void(entity attacker, float damage) player_pain;
+void() player_stand1;
+
+// player.qc
+void(float num_bubbles) DeathBubbles;
+void() bubble_bob;
+void() player_diea1;
+void() player_dieb1;
+void() player_diec1;
+void() player_died1;
+void() player_diee1;
+void() player_die_ax1;
+
+// demon.qc
+void() Demon_JumpTouch;
+
+// shambler.qc
+void() sham_swingr1;
+
+// soldier.qc
+void() army_fire;
+
+// wizard.qc
+void() wiz_run1;
+void() wiz_side1;
+
+// dog.qc
+void() dog_leap1;
+void() dog_run1;
+
+// boss.qc
+void(vector p) boss_missile;
+
+// tarbaby.qc
+void() tbaby_jump1;
+void() tbaby_jump5;
+
+// hknight.qc
+void() hknight_char_a1;
+void() hknight_run1;
+void() hk_idle_sound;
+
+// shalrath.qc
+void(entity attacker, float damage) shalrath_pain;
+void() ShalMissile;
+void() ShalMissileTouch;
+void() ShalHome;
+
+// oldone.qc
+void() finale_1;
+void() finale_2;
+void() finale_3;
+void() finale_4;

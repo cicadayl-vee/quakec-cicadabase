@@ -17,15 +17,6 @@
     See file, 'COPYING', for details.
 */
 
-/*============================================================================
-
-ALL LIGHTS SHOULD BE 0 1 0 IN COLOR
-ALL OTHER ITEMS SHOULD BE .8 .3 .4 IN COLOR
-
-============================================================================*/
-
-void() W_SetCurrentAmmo;
-
 void() SUB_regen =
 {
 	// restore original model
@@ -40,9 +31,14 @@ void() SUB_regen =
 	setorigin(self, self.origin);
 };
 
-/*QUAKED noclass (0 0 0) (-8 -8 -8) (8 8 8)
+/*============================================================================
+
+noclass
+
 prints a warning message when spawned
-*/
+
+============================================================================*/
+
 void() noclass =
 {
 	dprint("noclass spawned at");
@@ -58,6 +54,7 @@ PlaceItem
 Plants the object on the floor
 
 ============================================================================*/
+
 void() PlaceItem =
 {
 	float oldz;
@@ -88,6 +85,7 @@ StartItem
 Sets the clipping size and plants the object on the floor
 
 ============================================================================*/
+
 void() StartItem =
 {
 	// items start after other solids

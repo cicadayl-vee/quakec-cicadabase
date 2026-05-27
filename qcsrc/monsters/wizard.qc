@@ -23,11 +23,6 @@ WIZARD
 
 ============================================================================*/
 
-$cd id1/models/a_wizard
-$origin 0 0 24
-$base wizbase
-$skin wizbase
-
 $frame hover1 hover2 hover3 hover4 hover5 hover6 hover7 hover8
 $frame hover9 hover10 hover11 hover12 hover13 hover14 hover15
 
@@ -58,6 +53,7 @@ if self.enemy maintains it's current velocity
 0.1 is moderately accurate, 0.0 is totally accurate
 
 ============================================================================*/
+
 void(entity missile, float mspeed, float accuracy) LaunchMissile =
 {
 	vector vec, move;
@@ -91,14 +87,12 @@ void(entity missile, float mspeed, float accuracy) LaunchMissile =
 	missile.think = SUB_Remove;
 };
 
-void() wiz_run1;
-void() wiz_side1;
-
 /*=============================================================================
 
 WizardCheckAttack
 
 =============================================================================*/
+
 float() WizardCheckAttack =
 {
 	vector spot1, spot2;
@@ -180,6 +174,7 @@ float() WizardCheckAttack =
 WizardAttackFinished
 
 =============================================================================*/
+
 void() WizardAttackFinished =
 {
 	if (enemy_range >= RANGE_MID || !enemy_vis)
@@ -384,13 +379,8 @@ void(entity attacker, float damage) Wiz_Pain =
 	wiz_pain1();
 };
 
-void() Wiz_Missile =
-{
-	wiz_fast1();
-};
+void() Wiz_Missile = { wiz_fast1(); };
 
-/*QUAKED monster_wizard (1 0 0) (-16 -16 -24) (16 16 40) Ambush
-*/
 void() monster_wizard =
 {
 	if (deathmatch)
@@ -398,6 +388,7 @@ void() monster_wizard =
 		remove(self);
 		return;
 	}
+	
 	precache_model("progs/wizard.mdl");
 	precache_model("progs/h_wizard.mdl");
 	precache_model("progs/w_spike.mdl");

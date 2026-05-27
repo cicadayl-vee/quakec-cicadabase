@@ -17,6 +17,9 @@
     See file, 'COPYING', for details.
 */
 
+float H_ROTTEN = 1;
+float H_MEGA = 2;
+
 /*============================================================================
 
 T_Heal
@@ -24,8 +27,8 @@ T_Heal
 Add health to an entity, limiting health to max_health
 "ignore" will ignore max_health limit
 
-=========================================================================
-*/
+============================================================================*/
+
 float(entity e, float healamount, float ignore) T_Heal =
 {
 	if (e.health <= 0)
@@ -50,6 +53,7 @@ CheckHealthRot
 Checks for taking off health points from a player that recently used a Mega-Health.
 
 ============================================================================*/
+
 void CheckHealthRot() 
 {
 	if (!(self.items & IT_SUPERHEALTH)) 
@@ -69,18 +73,6 @@ void CheckHealthRot()
 	self.healthrot_nextcheck = 0;
 };
 
-float H_ROTTEN = 1;
-float H_MEGA = 2;
-.float healamount, healtype;
-void() health_touch;
-
-/*QUAKED item_health (.3 .3 1) (0 0 0) (32 32 32) rotten megahealth
-Health box. Normally gives 25 points.
-Rotten box heals 5 - 10 points,
-Megahealth will add 100 health, then
-rot you down to your maximum health limit,
-one point per second.
-*/
 void() item_health =
 {
 	self.touch = health_touch;
@@ -174,6 +166,7 @@ void() health_touch =
 	self.think = SUB_regen;
 	
 	activator = other;
+	
 	// fire all targets/killtargets
 	SUB_UseTargets();
 };

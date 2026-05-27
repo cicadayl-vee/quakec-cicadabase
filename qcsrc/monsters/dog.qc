@@ -23,11 +23,6 @@ DOG
 
 ============================================================================*/
 
-$cd id1/models/dog
-$origin 0 0 24
-$base base
-$skin skin
-
 $frame attack1 attack2 attack3 attack4 attack5 attack6 attack7 attack8
 
 $frame death1 death2 death3 death4 death5 death6 death7 death8 death9
@@ -48,14 +43,12 @@ $frame stand1 stand2 stand3 stand4 stand5 stand6 stand7 stand8 stand9
 
 $frame walk1 walk2 walk3 walk4 walk5 walk6 walk7 walk8
 
-void() dog_leap1;
-void() dog_run1;
-
 /*============================================================================
 
 dog_bite
 
 ============================================================================*/
+
 void() dog_bite =
 {
 	vector delta;
@@ -278,6 +271,7 @@ CheckDogMelee
 Returns TRUE if a melee attack would hit right now
 
 ============================================================================*/
+
 float() CheckDogMelee =
 {
 	if (enemy_range == RANGE_MELEE)
@@ -294,6 +288,7 @@ float() CheckDogMelee =
 CheckDogJump
 
 ============================================================================*/
+
 float() CheckDogJump =
 {
 	vector dist;
@@ -337,8 +332,6 @@ float() DogCheckAttack =
 	return FALSE;
 };
 
-/*QUAKED monster_dog (1 0 0) (-32 -32 -24) (32 32 40) Ambush
-*/
 void() monster_dog =
 {
 	if (deathmatch)
@@ -346,6 +339,7 @@ void() monster_dog =
 		remove(self);
 		return;
 	}
+	
 	precache_model("progs/h_dog.mdl");
 	precache_model("progs/dog.mdl");
 

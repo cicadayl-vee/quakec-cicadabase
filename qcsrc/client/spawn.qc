@@ -17,13 +17,6 @@
     See file, 'COPYING', for details.
 */
 
-void() DecodeLevelParms;
-void() PlayerDie;
-void() set_suicide_frame;
-
-void(entity attacker, float damage) player_pain;
-void() player_stand1;
-
 void() SetChangeParms =
 {
 	if (self.health <= 0 || deathmatch)
@@ -40,13 +33,16 @@ void() SetChangeParms =
 		self.health = 100;
 	if (self.health < 50)
 		self.health = 50;
+	
 	parm1 = self.items;
 	parm2 = self.health;
 	parm3 = self.armorvalue;
+	
 	if (self.ammo_shells < 25)
 		parm4 = 25;
 	else
 		parm4 = self.ammo_shells;
+	
 	parm5 = self.ammo_nails;
 	parm6 = self.ammo_rockets;
 	parm7 = self.ammo_cells;
@@ -94,6 +90,7 @@ ClientConnect
 called when a player connects to a server
 
 ============================================================================*/
+
 void() ClientConnect =
 {
 	bprint(self.netname);
@@ -113,6 +110,7 @@ ClientDisconnect
 Called when a player disconnects from a server
 
 ============================================================================*/
+
 void() ClientDisconnect =
 {
 	// if the level end trigger has been activated, just return
@@ -136,6 +134,7 @@ ClientKill
 Player entered the suicide command
 
 ============================================================================*/
+
 void() ClientKill =
 {
 	if (self.suicide_time > time)
@@ -164,6 +163,7 @@ PlayerVisibleToSpawnPoint
 Returns true if player can see this point
 
 ============================================================================*/
+
 float PlayerVisibleToSpawnPoint(entity point) 
 {
 	local vector spot1, spot2;
@@ -195,8 +195,6 @@ SelectSpawnPoint
 Returns the entity to spawn at
 
 ============================================================================*/
-float IDEAL_DIST_FROM_DM_SPAWN_POINT = 384;
-float MIN_DIST_FROM_DM_SPAWN_POINT = 84;
 
 entity() SelectSpawnPoint =
 {
@@ -344,6 +342,7 @@ PutClientInServer
 Called each time a player is spawned
 
 ============================================================================*/
+
 void() PutClientInServer =
 {
 	entity spot;
@@ -410,7 +409,6 @@ void() PutClientInServer =
 	spawn_tdeath(self.origin, self);
 };
 
-// called by ClientKill and DeadThink
 void() respawn =
 {
 	if (coop)
@@ -438,9 +436,6 @@ void() respawn =
 	}
 };
 
-/*
-go to the next level for deathmatch
-*/
 void() NextLevel =
 {
 	entity o;

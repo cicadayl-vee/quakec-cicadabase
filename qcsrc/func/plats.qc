@@ -17,12 +17,6 @@
     See file, 'COPYING', for details.
 */
 
-void() plat_center_touch;
-void() plat_outside_touch;
-void() plat_trigger_use;
-void() plat_go_up;
-void() plat_go_down;
-void() plat_crush;
 float PLAT_LOW_TRIGGER = 1;
 
 void() plat_spawn_inside_trigger =
@@ -147,18 +141,6 @@ void() plat_use =
 	plat_go_down();
 };
 
-/*QUAKED func_plat (0 .5 .8) ? PLAT_LOW_TRIGGER
-speed default 150
-
-Plats are always drawn in the extended position, so they will light correctly.
-
-If the plat is the target of another trigger or button, it will start out disabled in the extended position until it is trigger, when it will lower and become a normal plat.
-
-If the "height" key is set, that will determine the amount the plat moves, instead of being implicitly determined by the model's height.
-Set "sounds" to one of the following:
-1) base fast
-2) chain slow
-*/
 void() func_plat =
 {
 	if (!self.t_length)

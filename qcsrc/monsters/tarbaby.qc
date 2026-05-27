@@ -23,12 +23,6 @@ BLOB
 
 ============================================================================*/
 
-$cd id1/models/tarbaby
-$origin 0 0 24
-$base base
-
-$skin skin
-
 $frame walk1 walk2 walk3 walk4  walk5 walk6 walk7 walk8 walk9 walk10
 $frame walk11 walk12 walk13 walk14 walk15 walk16 walk17 walk18 walk19
 $frame walk20 walk21 walk22 walk23 walk24 walk25
@@ -42,6 +36,8 @@ $frame jump1 jump2 jump3 jump4 jump5 jump6
 $frame fly1 fly2 fly3 fly4
 
 $frame exp
+
+//============================================================================
 
 void() tbaby_stand1 = [ $walk1, tbaby_stand1 ] { ai_stand(); };
 
@@ -99,7 +95,7 @@ void() tbaby_run23 = [ $run23, tbaby_run24 ] { ai_run(2); };
 void() tbaby_run24 = [ $run24, tbaby_run25 ] { ai_run(2); };
 void() tbaby_run25 = [ $run25, tbaby_run1 ] { ai_run(2); };
 
-void() tbaby_jump1;
+//============================================================================
 
 void() Tar_JumpTouch =
 {
@@ -142,8 +138,6 @@ void() Tar_JumpTouch =
 	self.think = tbaby_jump1;
 	self.nextthink = time + 0.1;
 };
-
-void() tbaby_jump5;
 
 void() tbaby_fly1 = [ $fly1, tbaby_fly2 ] {};
 void() tbaby_fly2 = [ $fly2, tbaby_fly3 ] {};
@@ -193,8 +187,6 @@ void() tbaby_die2 = [ $exp, tbaby_run1 ]
 	BecomeExplosion();
 };
 
-/*QUAKED monster_tarbaby (1 0 0) (-16 -16 -24) (16 16 24) Ambush
-*/
 void() monster_tarbaby =
 {
 	if (deathmatch)
@@ -202,6 +194,7 @@ void() monster_tarbaby =
 		remove(self);
 		return;
 	}
+	
 	precache_model2("progs/tarbaby.mdl");
 
 	precache_sound2("blob/death1.wav");

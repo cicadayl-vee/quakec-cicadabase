@@ -23,11 +23,6 @@ SHAMBLER
 
 ============================================================================*/
 
-$cd id1/models/shams
-$origin 0 0 24
-$base base
-$skin base
-
 $frame stand1 stand2 stand3 stand4 stand5 stand6 stand7 stand8 stand9
 $frame stand10 stand11 stand12 stand13 stand14 stand15 stand16 stand17
 
@@ -52,6 +47,8 @@ $frame pain1 pain2 pain3 pain4 pain5 pain6
 
 $frame death1 death2 death3 death4 death5 death6
 $frame death7 death8 death9 death10 death11
+
+//============================================================================
 
 void() sham_stand1 = [ $stand1, sham_stand2 ] { ai_stand(); };
 void() sham_stand2 = [ $stand2, sham_stand3 ] { ai_stand(); };
@@ -139,8 +136,6 @@ void() sham_smash10 = [ $smash10, sham_smash11 ]
 };
 void() sham_smash11 = [ $smash11, sham_smash12 ] { ai_charge(5); };
 void() sham_smash12 = [ $smash12, sham_run1    ] { ai_charge(4); };
-
-void() sham_swingr1;
 
 void(float side) ShamClaw =
 {
@@ -358,6 +353,7 @@ The player is in view, so decide to move or launch an attack
 Returns FALSE if movement should continue
 
 ============================================================================*/
+
 float() ShamCheckAttack =
 {
 	vector spot1, spot2;
@@ -408,8 +404,6 @@ float() ShamCheckAttack =
 	return TRUE;
 };
 
-/*QUAKED monster_shambler (1 0 0) (-32 -32 -24) (32 32 64) Ambush
-*/
 void() monster_shambler =
 {
 	if (deathmatch)
@@ -417,6 +411,7 @@ void() monster_shambler =
 		remove(self);
 		return;
 	}
+	
 	precache_model("progs/shambler.mdl");
 	precache_model("progs/s_light.mdl");
 	precache_model("progs/h_shams.mdl");

@@ -61,6 +61,7 @@ void(entity hit, float damage) AddMultiDamage =
 TraceAttack
 
 ============================================================================*/
+
 void(float damage, vector dir) TraceAttack =
 {
 	vector vel, org;
@@ -94,6 +95,7 @@ Used by shotgun, super shotgun, and enemy soldier firing
 Go to the trouble of combining multiple pellets into a single damage call.
 
 ============================================================================*/
+
 void(float shotcount, vector dir, vector spread) FireBullets =
 {
 	vector direction;
@@ -123,6 +125,7 @@ void(float shotcount, vector dir, vector spread) FireBullets =
 W_FireShotgun
 
 ============================================================================*/
+
 void() W_FireShotgun =
 {
 	vector dir;
@@ -141,6 +144,7 @@ void() W_FireShotgun =
 W_FireSuperShotgun
 
 ============================================================================*/
+
 void() W_FireSuperShotgun =
 {
 	vector dir;

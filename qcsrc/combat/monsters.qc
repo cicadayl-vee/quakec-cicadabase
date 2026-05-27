@@ -19,29 +19,12 @@
 
 /*============================================================================
 
-ALL MONSTERS SHOULD BE 1 0 0 IN COLOR
-
-name = [ framenum, nexttime, nextthink ] { code }
-
-expands to:
-
-name()
-{
-	self.frame = framenum;
-	self.nextthink = time + nexttime;
-	self.think = nextthink
-	<code>
-};
-
-============================================================================*/
-
-/*============================================================================
-
 monster_use
 
 Using a monster makes it angry at the current activator
 
 ============================================================================*/
+
 void() monster_use =
 {
 	if (self.enemy)
@@ -69,6 +52,7 @@ When a mosnter dies, it fires all of its targets with the current
 enemy as activator.
 
 ============================================================================*/
+
 void() monster_death_use =
 {
 	// fall to ground

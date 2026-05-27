@@ -22,6 +22,7 @@
 LightningDamage
 
 =============================================================================*/
+
 void(vector p1, vector p2, entity from, float damage) LightningDamage =
 {
 	entity e1, e2;
@@ -114,4 +115,3 @@ void() W_FireLightning =
 
 	LightningDamage(self.origin, trace_endpos + v_forward * 4, self, 30);
 };
-

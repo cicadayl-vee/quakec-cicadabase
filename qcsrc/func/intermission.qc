@@ -26,13 +26,9 @@ LEVEL CHANGING/INTERMISSION
 float intermission_running;
 float intermission_exittime;
 
-/*QUAKED info_intermission (1 0.5 0.5) (-16 -16 -16) (16 16 16)
-This is the camera point for the intermission.
-Use mangle instead of angle, so you can set pitch or roll as well as yaw.  'pitch roll yaw'
-*/
-void() info_intermission =
-{
-};
+string nextmap;
+
+void() info_intermission = {};
 
 /*============================================================================
 
@@ -41,6 +37,7 @@ FindIntermission
 Returns the entity to view from
 
 ============================================================================*/
+
 entity() FindIntermission =
 {
 	entity spot;
@@ -76,7 +73,6 @@ entity() FindIntermission =
 	return world;
 };
 
-string nextmap;
 void() GotoNextMap =
 {
 	// if samelevel is set, stay on same level
@@ -182,6 +178,7 @@ IntermissionThink
 When the player presses attack or jump, change to the next level
 
 ============================================================================*/
+
 void() IntermissionThink =
 {
 	if (time < intermission_exittime)

@@ -68,8 +68,6 @@ void() armor_touch =
 	SUB_UseTargets();
 };
 
-/*QUAKED item_armor1 (0 .5 .8) (-16 -16 0) (16 16 32)
-*/
 void() item_armor1 =
 {
 	self.touch = armor_touch;
@@ -80,8 +78,6 @@ void() item_armor1 =
 	StartItem();
 };
 
-/*QUAKED item_armor2 (0 .5 .8) (-16 -16 0) (16 16 32)
-*/
 void() item_armor2 =
 {
 	self.touch = armor_touch;
@@ -92,8 +88,6 @@ void() item_armor2 =
 	StartItem();
 };
 
-/*QUAKED item_armorInv (0 .5 .8) (-16 -16 0) (16 16 32)
-*/
 void() item_armorInv =
 {
 	self.touch = armor_touch;

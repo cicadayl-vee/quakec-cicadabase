@@ -23,28 +23,19 @@ PLAYER
 
 ============================================================================*/
 
-$cd id1/models/player_4
-$origin 0 -6 24
-$base base
-$skin skin
-
-// running
 $frame axrun1 axrun2 axrun3 axrun4 axrun5 axrun6
 
 $frame rockrun1 rockrun2 rockrun3 rockrun4 rockrun5 rockrun6
 
-// standing
 $frame stand1 stand2 stand3 stand4 stand5
 
 $frame axstnd1 axstnd2 axstnd3 axstnd4 axstnd5 axstnd6
 $frame axstnd7 axstnd8 axstnd9 axstnd10 axstnd11 axstnd12
 
-// pain
 $frame axpain1 axpain2 axpain3 axpain4 axpain5 axpain6
 
 $frame pain1 pain2 pain3 pain4 pain5 pain6
 
-// death
 $frame axdeth1 axdeth2 axdeth3 axdeth4 axdeth5 axdeth6
 $frame axdeth7 axdeth8 axdeth9
 
@@ -63,7 +54,6 @@ $frame deathd8 deathd9
 $frame deathe1 deathe2 deathe3 deathe4 deathe5 deathe6 deathe7
 $frame deathe8 deathe9
 
-// attacks
 $frame nailatt1 nailatt2
 
 $frame light1 light2
@@ -80,48 +70,13 @@ $frame axattc1 axattc2 axattc3 axattc4 axattc5 axattc6
 
 $frame axattd1 axattd2 axattd3 axattd4 axattd5 axattd6
 
-/*============================================================================
+// ============================================================================
 
-PLAYER
-
-============================================================================*/
-
-/*QUAKED info_player_start (1 0 0) (-16 -16 -24) (16 16 24)
-The normal starting point for a level.
-*/
-void() info_player_start =
-{
-};
-
-/*QUAKED info_player_start2 (1 0 0) (-16 -16 -24) (16 16 24)
-Only used on start map for the return point from an episode.
-*/
-void() info_player_start2 =
-{
-};
-
-/*
-saved out by QuakeEd in region mode
-*/
-void() testplayerstart =
-{
-};
-
-/*QUAKED info_player_deathmatch (1 0 1) (-16 -16 -24) (16 16 24)
-potential spawning position for deathmatch games
-*/
-void() info_player_deathmatch =
-{
-};
-
-/*QUAKED info_player_coop (1 0 1) (-16 -16 -24) (16 16 24)
-potential spawning position for coop games
-*/
-void() info_player_coop =
-{
-};
-
-void() player_run;
+void() info_player_start = {};
+void() info_player_start2 = {};
+void() info_player_deathmatch = {};
+void() info_player_coop = {};
+void() testplayerstart = {};
 
 void() player_stand1 = [ $axstnd1, player_stand1 ]
 {
@@ -178,6 +133,7 @@ void() player_run = [ $rockrun1, player_run ]
 PlayerJump
 
 ============================================================================*/
+
 void() PlayerJump =
 {
 	if (self.flags & FL_WATERJUMP)
@@ -223,13 +179,12 @@ void() PlayerJump =
 	self.velocity_z = self.velocity_z + 270;
 };
 
-.float dmgtime;
-
 /*============================================================================
 
 WaterMove
 
 ============================================================================*/
+
 void() WaterMove =
 {
 	//dprint(ftos(self.waterlevel));
@@ -454,8 +409,6 @@ void() player_rocket4 = [ $rockatt4, player_rocket5  ] { self.weaponframe = 4; }
 void() player_rocket5 = [ $rockatt5, player_rocket6  ] { self.weaponframe = 5; };
 void() player_rocket6 = [ $rockatt6, player_run  ] { self.weaponframe = 6; };
 
-void(float num_bubbles) DeathBubbles;
-
 void() PainSound =
 {
 	float rs;
@@ -565,15 +518,6 @@ void(entity attacker, float damage) player_pain =
 	else
 		player_pain1();
 };
-
-void() player_diea1;
-void() player_dieb1;
-void() player_diec1;
-void() player_died1;
-void() player_diee1;
-void() player_die_ax1;
-
-void() bubble_bob;
 
 void() DeathBubblesSpawn =
 {
@@ -869,6 +813,7 @@ PlayerPreThink
 Called every frame before physics are run
 
 ============================================================================*/
+
 void() PlayerPreThink =
 {
 	if (intermission_running)
@@ -926,6 +871,7 @@ PlayerPostThink
 Called every frame after physics are run
 
 ============================================================================*/
+
 void() PlayerPostThink =
 {
 	// intermission or finale

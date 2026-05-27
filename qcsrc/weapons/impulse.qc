@@ -24,16 +24,15 @@ ServerflagsCommand
 Just for development
 
 ============================================================================*/
-void() ServerflagsCommand =
-{
-	serverflags = serverflags * 2 + 1;
-};
+
+void() ServerflagsCommand = { serverflags = serverflags * 2 + 1; };
 
 /*============================================================================
 
 W_ChangeWeapon
 
 ============================================================================*/
+
 void() W_ChangeWeapon =
 {
 	float it, am, fl;
@@ -118,6 +117,7 @@ CycleWeaponCommand
 Go to the next weapon with ammo
 
 ============================================================================*/
+
 void() CycleWeaponCommand =
 {
 	float it, am;
@@ -191,6 +191,7 @@ CycleWeaponReverseCommand
 Go to the prev weapon with ammo
 
 ============================================================================*/
+
 void() CycleWeaponReverseCommand =
 {
 	float it, am;
@@ -263,6 +264,7 @@ void() CycleWeaponReverseCommand =
 WeaponsCheat
 
 ============================================================================*/
+
 void() WeaponsCheat =
 {
 	if (deathmatch || coop)
@@ -299,6 +301,7 @@ void() WeaponsCheat =
 QuadCheat
 
 ============================================================================*/
+
 void() QuadCheat =
 {
 	if (deathmatch || coop)
@@ -317,6 +320,7 @@ void() QuadCheat =
 OmnicideCheat
 
 ============================================================================*/
+
 void() OmnicideCheat =
 {
 	entity head;
@@ -341,6 +345,7 @@ void() OmnicideCheat =
 ImpulseCommands
 
 ============================================================================*/
+
 void() ImpulseCommands =
 {
 	// weapon switching

@@ -41,9 +41,6 @@ void() sigil_touch =
 	SUB_UseTargets();
 };
 
-/*QUAKED item_sigil (0 .5 .8) (-16 -16 -24) (16 16 32) E1 E2 E3 E4
-End of level sigil, pick up to end episode and return to jrstart.
-*/
 void() item_sigil =
 {
 	if (!self.spawnflags)

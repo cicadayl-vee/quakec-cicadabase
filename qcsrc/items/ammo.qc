@@ -17,6 +17,12 @@
     See file, 'COPYING', for details.
 */
 
+float WEAPON_BIG2 = 1;
+float WEAPON_SHOTGUN = 1;
+float WEAPON_ROCKET = 2;
+float WEAPON_SPIKES = 4;
+float WEAPON_BIG = 8;
+
 void() bound_other_ammo =
 {
 	if (other.ammo_shells > 100)
@@ -47,12 +53,13 @@ float(float w) RankForWeapon =
 };
 
 /*============================================================================
+
 Deathmatch_Weapon
 
 Deathmatch weapon change rules for picking up a weapon
 
-.float ammo_shells, ammo_nails, ammo_rockets, ammo_cells;
 ============================================================================*/
+
 void(float old, float new) Deathmatch_Weapon =
 {
 	float or, nr;
@@ -64,13 +71,12 @@ void(float old, float new) Deathmatch_Weapon =
 		self.weapon = new;
 };
 
-float() W_BestWeapon;
-
 /*============================================================================
 
 weapon_touch
 
 ============================================================================*/
+
 void() weapon_touch =
 {
 	float hadammo, best, new, old;
@@ -183,8 +189,8 @@ void() weapon_touch =
 	SUB_UseTargets();
 };
 
-/*QUAKED weapon_supershotgun (0 .5 .8) (-16 -16 0) (16 16 32)
-*/
+//============================================================================
+
 void() weapon_supershotgun =
 {
 	precache_model("progs/g_shot.mdl");
@@ -196,8 +202,6 @@ void() weapon_supershotgun =
 	StartItem();
 };
 
-/*QUAKED weapon_nailgun (0 .5 .8) (-16 -16 0) (16 16 32)
-*/
 void() weapon_nailgun =
 {
 	precache_model("progs/g_nail.mdl");
@@ -209,8 +213,6 @@ void() weapon_nailgun =
 	StartItem();
 };
 
-/*QUAKED weapon_supernailgun (0 .5 .8) (-16 -16 0) (16 16 32)
-*/
 void() weapon_supernailgun =
 {
 	precache_model("progs/g_nail2.mdl");
@@ -222,8 +224,6 @@ void() weapon_supernailgun =
 	StartItem();
 };
 
-/*QUAKED weapon_grenadelauncher (0 .5 .8) (-16 -16 0) (16 16 32)
-*/
 void() weapon_grenadelauncher =
 {
 	precache_model("progs/g_rock.mdl");
@@ -235,8 +235,6 @@ void() weapon_grenadelauncher =
 	StartItem();
 };
 
-/*QUAKED weapon_rocketlauncher (0 .5 .8) (-16 -16 0) (16 16 32)
-*/
 void() weapon_rocketlauncher =
 {
 	precache_model("progs/g_rock2.mdl");
@@ -248,8 +246,6 @@ void() weapon_rocketlauncher =
 	StartItem();
 };
 
-/*QUAKED weapon_lightning (0 .5 .8) (-16 -16 0) (16 16 32)
-*/
 void() weapon_lightning =
 {
 	precache_model("progs/g_light.mdl");
@@ -261,9 +257,7 @@ void() weapon_lightning =
 	StartItem();
 };
 
-
 //=============================================================================
-
 
 void() ammo_touch =
 {
@@ -298,7 +292,7 @@ void() ammo_touch =
 		other.ammo_nails = other.ammo_nails + self.aflag;
 	}
 
-	//	rockets
+	// rockets
 	if (self.weapon == 3)
 	{
 		if (other.ammo_rockets >= 100)
@@ -306,7 +300,7 @@ void() ammo_touch =
 		other.ammo_rockets = other.ammo_rockets + self.aflag;
 	}
 
-	//	cells
+	// cells
 	if (self.weapon == 4)
 	{
 		if (other.ammo_cells >= 100)
@@ -354,10 +348,8 @@ void() ammo_touch =
 	SUB_UseTargets();
 };
 
-float WEAPON_BIG2 = 1;
+//============================================================================
 
-/*QUAKED item_shells (0 .5 .8) (0 0 0) (32 32 32) big
-*/
 void() item_shells =
 {
 	self.touch = ammo_touch;
@@ -380,8 +372,6 @@ void() item_shells =
 	StartItem();
 };
 
-/*QUAKED item_spikes (0 .5 .8) (0 0 0) (32 32 32) big
-*/
 void() item_spikes =
 {
 	self.touch = ammo_touch;
@@ -404,8 +394,6 @@ void() item_spikes =
 	StartItem();
 };
 
-/*QUAKED item_rockets (0 .5 .8) (0 0 0) (32 32 32) big
-*/
 void() item_rockets =
 {
 	self.touch = ammo_touch;
@@ -428,8 +416,6 @@ void() item_rockets =
 	StartItem();
 };
 
-/*QUAKED item_cells (0 .5 .8) (0 0 0) (32 32 32) big
-*/
 void() item_cells =
 {
 	self.touch = ammo_touch;
@@ -452,14 +438,14 @@ void() item_cells =
 	StartItem();
 };
 
-float WEAPON_SHOTGUN = 1;
-float WEAPON_ROCKET = 2;
-float WEAPON_SPIKES = 4;
-float WEAPON_BIG = 8;
+/*============================================================================
 
-/*QUAKED item_weapon (0 .5 .8) (0 0 0) (32 32 32) shotgun rocket spikes big
+item_weapon
+
 DO NOT USE THIS!!!! IT WILL BE REMOVED!
-*/
+
+============================================================================*/
+
 void() item_weapon =
 {
 	self.touch = ammo_touch;

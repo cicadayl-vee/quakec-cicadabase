@@ -23,7 +23,7 @@ float DOOR_GOLD_KEY = 8;
 float DOOR_SILVER_KEY = 16;
 float DOOR_TOGGLE = 32;
 
-/*
+/*============================================================================
 
 Doors are similar to buttons, but can spawn a fat trigger field around them
 to open without a touch, and they link together to form simultanious
@@ -34,16 +34,13 @@ If multiple doors, all will point to a single one.
 
 Door.enemy chains from the master door through all doors linked in the chain.
 
-*/
+============================================================================*/
 
 /*============================================================================
 
 THINK FUNCTIONS
 
 ============================================================================*/
-
-void() door_go_down;
-void() door_go_up;
 
 void() door_blocked =
 {
@@ -210,6 +207,7 @@ door_touch
 Prints messages and opens key doors
 
 ============================================================================*/
+
 void() door_touch =
 {
 	if (other.classname != "player")
@@ -324,6 +322,7 @@ float(entity e1, entity e2) EntitiesTouching =
 LinkDoors
 
 ============================================================================*/
+
 void() LinkDoors =
 {
 	entity t, starte;
@@ -405,30 +404,6 @@ void() LinkDoors =
 
 };
 
-/*QUAKED func_door (0 .5 .8) ? START_OPEN x DOOR_DONT_LINK GOLD_KEY SILVER_KEY TOGGLE
-if two doors touch, they are assumed to be connected and operate as a unit.
-
-TOGGLE causes the door to wait in both the start and end states for a trigger event.
-
-START_OPEN causes the door to move to its destination when spawned, and operate in reverse.  It is used to temporarily or permanently close off an area when triggered(not usefull for touch or takedamage doors).
-
-Key doors are always wait -1.
-
-"message" is printed when the door is touched if it is a trigger door and it hasn't been fired yet
-"angle" determines the opening direction
-"targetname" if set, no touch field will be spawned and a remote button or trigger field activates the door.
-"health" if set, door must be shot open
-"speed" movement speed(100 default)
-"wait" wait before returning(3 default, -1 = never return)
-"lip" lip remaining at end of move(8 default)
-"dmg" damage to inflict when blocked(2 default)
-"sounds"
-0) no sound
-1) stone
-2) base
-3) stone chain
-4) screechy metal
-*/
 void() func_door =
 {
 	if (world.worldtype == 0)
@@ -555,19 +530,11 @@ SECRET DOORS
 
 ============================================================================*/
 
-void() fd_secret_move1;
-void() fd_secret_move2;
-void() fd_secret_move3;
-void() fd_secret_move4;
-void() fd_secret_move5;
-void() fd_secret_move6;
-void() fd_secret_done;
-
 float SECRET_OPEN_ONCE = 1;		// stays open
 float SECRET_1ST_LEFT = 2;		// 1st move is left of arrow
 float SECRET_1ST_DOWN = 4;		// 1st move is down from arrow
 float SECRET_NO_SHOOT = 8;		// only opened by trigger
-float SECRET_YES_SHOOT = 16;	// shootable even if targeted
+float SECRET_YES_SHOOT = 16;		// shootable even if targeted
 
 void() fd_secret_use =
 {
@@ -694,10 +661,13 @@ void() secret_blocked =
 };
 
 /*============================================================================
+
 secret_touch
 
 Prints messages
+
 ============================================================================*/
+
 void() secret_touch =
 {
 	if (other.classname != "player")
@@ -714,22 +684,6 @@ void() secret_touch =
 	}
 };
 
-/*QUAKED func_door_secret (0 .5 .8) ? open_once 1st_left 1st_down no_shoot always_shoot
-Basic secret door. Slides back, then to the side. Angle determines direction.
-wait  = # of seconds before coming back
-1st_left = 1st move is left of arrow
-1st_down = 1st move is down from arrow
-always_shoot = even if targeted, keep shootable
-t_width = override WIDTH to move back(or height if going down)
-t_length = override LENGTH to move sideways
-"dmg" damage to inflict when blocked(2 default)
-
-If a secret door has a targetname, it will only be opened by it's botton or trigger, not by damage.
-"sounds"
-1) medieval
-2) metal
-3) base
-*/
 void() func_door_secret =
 {
 	if (self.sounds == 0)

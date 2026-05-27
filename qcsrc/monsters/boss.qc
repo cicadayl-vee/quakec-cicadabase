@@ -23,12 +23,6 @@ CHTHON
 
 ============================================================================*/
 
-$cd id1/models/boss1
-$origin 0 0 -15
-$base base
-$skin skin
-$scale 5
-
 $frame rise1 rise2 rise3 rise4 rise5 rise6 rise7 rise8 rise9 rise10
 $frame rise11 rise12 rise13 rise14 rise15 rise16 rise17
 
@@ -52,11 +46,10 @@ $frame shockb1 shockb2 shockb3 shockb4 shockb5 shockb6
 $frame shockc1 shockc2 shockc3 shockc4 shockc5 shockc6 shockc7 shockc8
 $frame shockc9 shockc10
 
-void(vector p) boss_missile;
+//============================================================================
 
 void() boss_face =
 {
-
 	// go for another player if multi player
 	if (self.enemy.health <= 0 || random() < 0.02)
 	{
@@ -267,8 +260,6 @@ void() boss_awake =
 	boss_rise1();
 };
 
-/*QUAKED monster_boss (1 0 0) (-128 -128 -24) (128 128 256)
-*/
 void() monster_boss =
 {
 	if (deathmatch)
@@ -293,6 +284,8 @@ void() monster_boss =
 
 	self.use = boss_awake;
 };
+
+//============================================================================
 
 entity le1, le2;
 float lightning_end;
@@ -381,10 +374,4 @@ void() lightning_use =
 	}
 };
 
-/*QUAKED event_lightning (0 1 1) (-16 -16 -16) (16 16 16)
-Just for boss level.
-*/
-void() event_lightning =
-{
-	self.use = lightning_use;
-};
+void() event_lightning = { self.use = lightning_use; };

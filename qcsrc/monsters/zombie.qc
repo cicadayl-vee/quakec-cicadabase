@@ -23,13 +23,6 @@ ZOMBIE
 
 ============================================================================*/
 
-$cd id1/models/zombie
-
-$origin 0 0 24
-
-$base base
-$skin skin
-
 $frame stand1 stand2 stand3 stand4 stand5 stand6 stand7 stand8
 $frame stand9 stand10 stand11 stand12 stand13 stand14 stand15
 
@@ -68,9 +61,9 @@ $frame paine29 paine30
 
 $frame cruc_1 cruc_2 cruc_3 cruc_4 cruc_5 cruc_6
 
-float SPAWN_CRUCIFIED = 1;
+//============================================================================
 
-.float inpain;
+float SPAWN_CRUCIFIED = 1;
 
 void() zombie_stand1 = [ $stand1, zombie_stand2 ] { ai_stand(); };
 void() zombie_stand2 = [ $stand2, zombie_stand3 ] { ai_stand(); };
@@ -181,6 +174,7 @@ void() ZombieGrenadeTouch =
 ZombieFireGrenade
 
 ============================================================================*/
+
 void(vector st) ZombieFireGrenade =
 {
 	entity missile;
@@ -427,6 +421,7 @@ fast pain frames.
 A hit of less than 10 points of damage (winged by a shotgun) will be ignored.
 
 FIXME: don't use pain_finished because of nightmare hack
+
 =============================================================================*/
 
 void(entity attacker, float take) zombie_pain =
@@ -483,9 +478,6 @@ void(entity attacker, float take) zombie_pain =
 		zombie_paind1();
 };
 
-/*QUAKED monster_zombie (1 0 0) (-16 -16 -24) (16 16 32) Crucified ambush
-If crucified, stick the bounding box 12 pixels back into a wall to look right.
-*/
 void() monster_zombie =
 {
 	if (deathmatch)

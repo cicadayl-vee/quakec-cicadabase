@@ -23,11 +23,6 @@ ENFORCER
 
 ============================================================================*/
 
-$cd id1/models/enforcer
-$origin 0 -6 24
-$base base
-$skin skin
-
 $frame stand1 stand2 stand3 stand4 stand5 stand6 stand7
 
 $frame walk1 walk2 walk3 walk4 walk5 walk6 walk7 walk8 walk9 walk10
@@ -53,6 +48,8 @@ $frame painc1 painc2 painc3 painc4 painc5 painc6 painc7 painc8
 $frame paind1 paind2 paind3 paind4 paind5 paind6 paind7 paind8
 $frame paind9 paind10 paind11 paind12 paind13 paind14 paind15 paind16
 $frame paind17 paind18 paind19
+
+//============================================================================
 
 void() Laser_Touch =
 {
@@ -323,8 +320,6 @@ void() enf_die =
 		enf_fdie1();
 };
 
-/*QUAKED monster_enforcer (1 0 0) (-16 -16 -24) (16 16 40) Ambush
-*/
 void() monster_enforcer =
 {
 	if (deathmatch)
@@ -332,6 +327,7 @@ void() monster_enforcer =
 		remove(self);
 		return;
 	}
+	
 	precache_model2("progs/enforcer.mdl");
 	precache_model2("progs/h_mega.mdl");
 	precache_model2("progs/laser.mdl");

@@ -23,11 +23,6 @@ KNIGHT
 
 ============================================================================*/
 
-$cd id1/models/knight
-$origin 0 0 24
-$base base
-$skin badass3
-
 $frame stand1 stand2 stand3 stand4 stand5 stand6 stand7 stand8 stand9
 
 $frame runb1 runb2 runb3 runb4 runb5 runb6 runb7 runb8
@@ -56,6 +51,8 @@ $frame death9 death10
 
 $frame deathb1 deathb2 deathb3 deathb4 deathb5 deathb6 deathb7 deathb8
 $frame deathb9 deathb10 deathb11
+
+//============================================================================
 
 void() knight_stand1 = [ $stand1, knight_stand2 ] { ai_stand(); };
 void() knight_stand2 = [ $stand2, knight_stand3 ] { ai_stand(); };
@@ -134,9 +131,6 @@ void() knight_atk7 = [ $attackb7, knight_atk8 ] { ai_charge(1); ai_melee(); };
 void() knight_atk8 = [ $attackb8, knight_atk9 ] { ai_charge(3); ai_melee(); };
 void() knight_atk9 = [ $attackb9, knight_atk10 ] { ai_charge(1); };
 void() knight_atk10 = [ $attackb10, knight_run1 ] { ai_charge(5); };
-//void() knight_atk9 = [ $attack9, knight_atk10 ] {};
-//void() knight_atk10 = [ $attack10, knight_atk11 ] {};
-//void() knight_atk11 = [ $attack11, knight_run1 ] {};
 
 void() knight_pain1 = [ $pain1, knight_pain2 ] {};
 void() knight_pain2 = [ $pain2, knight_pain3 ] {};
@@ -232,8 +226,6 @@ void() knight_die =
 		knight_dieb1();
 };
 
-/*QUAKED monster_knight (1 0 0) (-16 -16 -24) (16 16 40) Ambush
-*/
 void() monster_knight =
 {
 	if (deathmatch)
@@ -241,6 +233,7 @@ void() monster_knight =
 		remove(self);
 		return;
 	}
+	
 	precache_model("progs/knight.mdl");
 	precache_model("progs/h_knight.mdl");
 

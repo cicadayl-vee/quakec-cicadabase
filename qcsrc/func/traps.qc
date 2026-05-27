@@ -26,8 +26,6 @@ TRAPS
 float SPAWNFLAG_SUPERSPIKE = 1;
 float SPAWNFLAG_LASER = 2;
 
-void(vector org, vector vec) LaunchLaser;
-
 void() spikeshooter_use =
 {
 	if (self.spawnflags & SPAWNFLAG_LASER)
@@ -52,10 +50,6 @@ void() shooter_think =
 	newmis.velocity = self.movedir * 500;
 };
 
-/*QUAKED trap_spikeshooter (0 .5 .8) (-8 -8 -8) (8 8 8) superspike laser
-When triggered, fires a spike in the direction set in QuakeEd.
-Laser is only for REGISTERED.
-*/
 void() trap_spikeshooter =
 {
 	SetMovedir();
@@ -71,11 +65,6 @@ void() trap_spikeshooter =
 		precache_sound("weapons/spike2.wav");
 };
 
-/*QUAKED trap_shooter (0 .5 .8) (-8 -8 -8) (8 8 8) superspike laser
-Continuously fires spikes.
-"wait" time between spike(1.0 default)
-"nextthink" delay before firing first spike, so multiple shooters can be stagered.
-*/
 void() trap_shooter =
 {
 	trap_spikeshooter();

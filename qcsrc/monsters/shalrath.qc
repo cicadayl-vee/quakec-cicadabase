@@ -39,8 +39,7 @@ $frame death1 death2 death3 death4 death5 death6 death7
 $frame walk1 walk2 walk3 walk4 walk5 walk6 walk7 walk8 walk9 walk10
 $frame walk11 walk12
 
-void(entity attacker, float damage) shalrath_pain;
-void() ShalMissile;
+//============================================================================
 
 void() shal_stand = [ $walk1, shal_stand ] { ai_stand(); };
 
@@ -136,11 +135,7 @@ void() shalrath_die =
 	sound(self, CHAN_VOICE, "shalrath/death.wav", 1, ATTN_NORM);
 	shal_death1();
 	self.solid = SOLID_NOT;
-	// insert death sounds here
 };
-
-void() ShalMissileTouch;
-void() ShalHome;
 
 /*============================================================================
 
@@ -223,8 +218,6 @@ void() ShalMissileTouch =
 	s_explode1();
 };
 
-/*QUAKED monster_shalrath (1 0 0) (-32 -32 -24) (32 32 48) Ambush
-*/
 void() monster_shalrath =
 {
 	if (deathmatch)
@@ -232,6 +225,7 @@ void() monster_shalrath =
 		remove(self);
 		return;
 	}
+	
 	precache_model2("progs/shalrath.mdl");
 	precache_model2("progs/h_shal.mdl");
 	precache_model2("progs/v_spike.mdl");

@@ -88,6 +88,7 @@ CheckPowerups
 Check for turning off powerups
 
 ============================================================================*/
+
 void() CheckPowerups =
 {
 	if (self.health <= 0)
@@ -241,9 +242,6 @@ void() CheckPowerups =
 	}
 };
 
-/*QUAKED item_artifact_invulnerability (0 .5 .8) (-16 -16 -24) (16 16 32)
-Player is invulnerable for 30 seconds
-*/
 void() item_artifact_invulnerability =
 {
 	self.touch = powerup_touch;
@@ -260,9 +258,6 @@ void() item_artifact_invulnerability =
 	StartItem();
 };
 
-/*QUAKED item_artifact_envirosuit (0 .5 .8) (-16 -16 -24) (16 16 32)
-Player takes no damage from water or slime for 30 seconds
-*/
 void() item_artifact_envirosuit =
 {
 	self.touch = powerup_touch;
@@ -278,9 +273,6 @@ void() item_artifact_envirosuit =
 	StartItem();
 };
 
-/*QUAKED item_artifact_invisibility (0 .5 .8) (-16 -16 -24) (16 16 32)
-Player is invisible for 30 seconds
-*/
 void() item_artifact_invisibility =
 {
 	self.touch = powerup_touch;
@@ -297,9 +289,6 @@ void() item_artifact_invisibility =
 	StartItem();
 };
 
-/*QUAKED item_artifact_super_damage (0 .5 .8) (-16 -16 -24) (16 16 32)
-The next attack from the player will do 4x damage
-*/
 void() item_artifact_super_damage =
 {
 	self.touch = powerup_touch;

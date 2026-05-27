@@ -17,10 +17,7 @@
     See file, 'COPYING', for details.
 */
 
-float() crandom =
-{
-	return 2 * (random() - 0.5);
-};
+float() crandom = { return 2 * (random() - 0.5); };
 
 vector() wall_velocity =
 {
@@ -69,16 +66,15 @@ void(vector org, vector vel) SpawnMeatSpray =
 SpawnBlood
 
 ============================================================================*/
-void(vector org, vector vel, float damage) SpawnBlood =
-{
-	particle(org, vel * 0.1, 73, damage * 2);
-};
+
+void(vector org, vector vel, float damage) SpawnBlood = { particle(org, vel * 0.1, 73, damage * 2); };
 
 /*============================================================================
 
 spawn_touchblood
 
 ============================================================================*/
+
 void(float damage) spawn_touchblood =
 {
 	vector vel;
@@ -86,9 +82,6 @@ void(float damage) spawn_touchblood =
 	vel = wall_velocity() * 0.2;
 	SpawnBlood(self.origin + vel * 0.01, vel, damage);
 };
-
-//=============================================================================
-
 
 vector(float dm) VelocityForDamage =
 {
@@ -119,6 +112,7 @@ vector(float dm) VelocityForDamage =
 ThrowGib
 
 ============================================================================*/
+
 void(string gibname, float dm) ThrowGib =
 {
 	entity new;
@@ -145,6 +139,7 @@ void(string gibname, float dm) ThrowGib =
 ThrowHead
 
 ============================================================================*/
+
 void(string gibname, float dm) ThrowHead =
 {
 	setmodel(self, gibname);

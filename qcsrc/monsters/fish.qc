@@ -17,10 +17,11 @@
     See file, 'COPYING', for details.
 */
 
-$cd id1/models/fish
-$origin 0 0 24
-$base base
-$skin skin
+/*============================================================================
+
+ROTFISH
+
+============================================================================*/
 
 $frame attack1 attack2 attack3 attack4 attack5 attack6
 $frame attack7 attack8 attack9 attack10 attack11 attack12 attack13
@@ -37,7 +38,7 @@ $frame swim18
 $frame pain1 pain2 pain3 pain4 pain5 pain6 pain7 pain8
 $frame pain9
 
-void() swimmonster_start;
+//============================================================================
 
 void() f_stand1  = [ $swim1, f_stand2 ] { ai_stand(); };
 void() f_stand2  = [ $swim2, f_stand3 ] { ai_stand(); };
@@ -183,14 +184,9 @@ void() f_pain7  = [ $pain7, f_pain8 ] { ai_pain(6); };
 void() f_pain8  = [ $pain8, f_pain9 ] { ai_pain(6); };
 void() f_pain9  = [ $pain9, f_run1 ] { ai_pain(6); };
 
-void(entity attacker, float damage) fish_pain =
-{
-	// fish always do pain frames
-	f_pain1();
-};
+// fish always do pain frames
+void(entity attacker, float damage) fish_pain = { f_pain1(); };
 
-/*QUAKED monster_fish (1 0 0) (-16 -16 -24) (16 16 24) Ambush
-*/
 void() monster_fish =
 {
 	if (deathmatch)
@@ -198,6 +194,7 @@ void() monster_fish =
 		remove(self);
 		return;
 	}
+	
 	precache_model2("progs/fish.mdl");
 
 	precache_sound2("fish/death.wav");

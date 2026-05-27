@@ -21,6 +21,7 @@ void(entity targ, entity attacker) ClientObituary =
 {
 	float rnum;
 	string deathstring, deathstring2;
+	
 	rnum = random();
 
 	if (targ.classname == "player")

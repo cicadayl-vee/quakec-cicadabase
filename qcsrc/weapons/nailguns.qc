@@ -96,7 +96,9 @@ void() superspike_touch =
 launch_spike
 
 Used for both the player and the ogre
+
 ============================================================================*/
+
 void(vector org, vector dir) launch_spike =
 {
 	newmis = spawn();
@@ -122,6 +124,7 @@ void(vector org, vector dir) launch_spike =
 W_FireSuperSpikes
 
 ============================================================================*/
+
 void() W_FireSuperSpikes =
 {
 	vector dir;
@@ -142,6 +145,7 @@ void() W_FireSuperSpikes =
 W_FireSpikes
 
 ============================================================================*/
+
 void(float ox) W_FireSpikes =
 {
 	vector dir;

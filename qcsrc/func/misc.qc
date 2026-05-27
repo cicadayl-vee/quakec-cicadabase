@@ -17,31 +17,14 @@
     See file, 'COPYING', for details.
 */
 
-/*QUAKED info_null (0 0.5 0) (-4 -4 -4) (4 4 4)
-Used as a positional target for spotlights, etc.
-*/
-void() info_null =
-{
-	remove(self);
-};
+void() info_null = { remove(self); };
 
-/*QUAKED info_notnull (0 0.5 0) (-4 -4 -4) (4 4 4)
-Used as a positional target for lightning.
-*/
-void() info_notnull =
-{
-};
+void() info_notnull = {};
 
 //============================================================================
 
-/*QUAKED misc_fireball (0 .5 .8) (-8 -8 -8) (8 8 8)
-Lava Balls
-*/
-void() fire_fly;
-void() fire_touch;
 void() misc_fireball =
 {
-
 	precache_model("progs/lavaball.mdl");
 	self.classname = "fireball";
 	self.nextthink = time + (random() * 5);
@@ -94,9 +77,6 @@ void() barrel_explode =
 	BecomeExplosion();
 };
 
-/*QUAKED misc_explobox (0 .5 .8) (0 0 0) (32 32 64)
-TESTING THING
-*/
 void() misc_explobox =
 {
 	float oldz;
@@ -122,9 +102,6 @@ void() misc_explobox =
 	}
 };
 
-/*QUAKED misc_explobox2 (0 .5 .8) (0 0 0) (32 32 64)
-Smaller exploding box, REGISTERED ONLY
-*/
 void() misc_explobox2 =
 {
 	float oldz;
@@ -150,23 +127,13 @@ void() misc_explobox2 =
 	}
 };
 
-//============================================================================
-
 /*============================================================================
 
 BUBBLES
 
 ============================================================================*/
 
-void() make_bubbles;
-void() bubble_remove;
-void() bubble_bob;
-
-/*QUAKED air_bubbles (0 .5 .8) (-8 -8 -8) (8 8 8)
-testing air bubbles
-*/
 void() air_bubbles =
-
 {
 	if (deathmatch)
 	{
@@ -228,6 +195,7 @@ void() bubble_remove =
 		//dprint("bump");
 		return;
 	}
+	
 	remove(self);
 };
 
@@ -270,11 +238,7 @@ void() bubble_bob =
 
 //============================================================================
 
-/*QUAKED viewthing (0 .5 .8) (-8 -8 -8) (8 8 8)
-Just for the debugging level.  Don't use
-*/
 void() viewthing =
-
 {
 	self.movetype = MOVETYPE_NONE;
 	self.solid = SOLID_NOT;
@@ -294,9 +258,6 @@ void() noise_think =
 	sound(self, 7, "enforcer/pain1.wav", 1, ATTN_NORM);
 };
 
-/*QUAKED misc_noisemaker (1 0.5 0) (-10 -10 -10) (10 10 10)
-For optimzation testing, starts a lot of sounds.
-*/
 void() misc_noisemaker =
 {
 	precache_sound2("enforcer/enfire.wav");

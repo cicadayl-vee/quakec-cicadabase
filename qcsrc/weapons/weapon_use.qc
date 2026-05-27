@@ -17,9 +17,6 @@
     See file, 'COPYING', for details.
 */
 
-void player_run();
-void ImpulseCommands();
-
 void() W_SetCurrentAmmo =
 {
 	// get out of any weapon firing states
@@ -141,15 +138,6 @@ An attack impulse can be triggered now
 
 ============================================================================*/
 
-void() player_axe1;
-void() player_axeb1;
-void() player_axec1;
-void() player_axed1;
-void() player_shot1;
-void() player_nail1;
-void() player_light1;
-void() player_rocket1;
-
 void() W_Attack =
 {
 	float r;
@@ -224,6 +212,7 @@ SuperDamageSound
 Plays sound if needed
 
 ============================================================================*/
+
 void() SuperDamageSound =
 {
 	if (self.super_damage_finished > time)
@@ -244,6 +233,7 @@ W_WeaponFrame
 Called every frame so impulse events can be handled as well as possible
 
 ============================================================================*/
+
 void() W_WeaponFrame =
 {
 	if (time < self.attack_finished)

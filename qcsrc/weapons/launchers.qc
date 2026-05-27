@@ -34,9 +34,7 @@ void() BecomeExplosion =
 	s_explode1();
 };
 
-
 //=============================================================================
-
 
 void() T_MissileTouch =
 {
@@ -86,6 +84,7 @@ void() T_MissileTouch =
 W_FireRocket
 
 ============================================================================*/
+
 void() W_FireRocket =
 {
 	entity missile;
@@ -119,9 +118,7 @@ void() W_FireRocket =
 	setorigin(missile, self.origin + v_forward * 8 + '0 0 16');
 };
 
-
 //=============================================================================
-
 
 void() GrenadeExplode =
 {
@@ -160,6 +157,7 @@ void() GrenadeTouch =
 W_FireGrenade
 
 ============================================================================*/
+
 void() W_FireGrenade =
 {
 	entity missile;

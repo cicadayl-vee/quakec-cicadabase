@@ -23,12 +23,6 @@ FIEND
 
 ============================================================================*/
 
-$cd id1/models/demon3
-$scale 0.8
-$origin 0 0 24
-$base base
-$skin base
-
 $frame stand1 stand2 stand3 stand4 stand5 stand6 stand7 stand8 stand9
 $frame stand10 stand11 stand12 stand13
 
@@ -46,7 +40,7 @@ $frame death1 death2 death3 death4 death5 death6 death7 death8 death9
 $frame attacka1 attacka2 attacka3 attacka4 attacka5 attacka6 attacka7 attacka8
 $frame attacka9 attacka10 attacka11 attacka12 attacka13 attacka14 attacka15
 
-void() Demon_JumpTouch;
+//============================================================================
 
 void() demon1_stand1 = [ $stand1, demon1_stand2 ] { ai_stand(); };
 void() demon1_stand2 = [ $stand2, demon1_stand3 ] { ai_stand(); };
@@ -182,51 +176,7 @@ void() demon_die =
 	demon1_die1();
 };
 
-void() Demon_MeleeAttack =
-{
-	demon1_atta1();
-};
-
-/*QUAKED monster_demon1 (1 0 0) (-32 -32 -24) (32 32 64) Ambush
-*/
-void() monster_demon1 =
-{
-	if (deathmatch)
-	{
-		remove(self);
-		return;
-	}
-
-	precache_model("progs/demon.mdl");
-	precache_model("progs/h_demon.mdl");
-
-	precache_sound("demon/ddeath.wav");
-	precache_sound("demon/dhit2.wav");
-	precache_sound("demon/djump.wav");
-	precache_sound("demon/dpain1.wav");
-	precache_sound("demon/idle1.wav");
-	precache_sound("demon/sight2.wav");
-
-	self.solid = SOLID_SLIDEBOX;
-	self.movetype = MOVETYPE_STEP;
-
-	setmodel(self, "progs/demon.mdl");
-
-	setsize(self, VEC_HULL2_MIN, VEC_HULL2_MAX);
-	self.health = 300;
-
-	self.th_stand = demon1_stand1;
-	self.th_walk = demon1_walk1;
-	self.th_run = demon1_run1;
-	self.th_die = demon_die;
-	// one of two attacks
-	self.th_melee = Demon_MeleeAttack;
-	// jump attack
-	self.th_missile = demon1_jump1;
-	self.th_pain = demon1_pain;
-
-	walkmonster_start();
-};
+void() Demon_MeleeAttack = { demon1_atta1(); };
 
 /*============================================================================
 
@@ -235,6 +185,7 @@ CheckDemonMelee
 Returns TRUE if a melee attack would hit right now
 
 ============================================================================*/
+
 float() CheckDemonMelee =
 {
 	if (enemy_range == RANGE_MELEE)
@@ -251,6 +202,7 @@ float() CheckDemonMelee =
 CheckDemonJump
 
 ============================================================================*/
+
 float() CheckDemonJump =
 {
 	vector dist;
@@ -362,4 +314,43 @@ void() Demon_JumpTouch =
 	self.touch = SUB_Null;
 	self.think = demon1_jump11;
 	self.nextthink = time + 0.1;
+};
+
+void() monster_demon1 =
+{
+	if (deathmatch)
+	{
+		remove(self);
+		return;
+	}
+
+	precache_model("progs/demon.mdl");
+	precache_model("progs/h_demon.mdl");
+
+	precache_sound("demon/ddeath.wav");
+	precache_sound("demon/dhit2.wav");
+	precache_sound("demon/djump.wav");
+	precache_sound("demon/dpain1.wav");
+	precache_sound("demon/idle1.wav");
+	precache_sound("demon/sight2.wav");
+
+	self.solid = SOLID_SLIDEBOX;
+	self.movetype = MOVETYPE_STEP;
+
+	setmodel(self, "progs/demon.mdl");
+
+	setsize(self, VEC_HULL2_MIN, VEC_HULL2_MAX);
+	self.health = 300;
+
+	self.th_stand = demon1_stand1;
+	self.th_walk = demon1_walk1;
+	self.th_run = demon1_run1;
+	self.th_die = demon_die;
+	// one of two attacks
+	self.th_melee = Demon_MeleeAttack;
+	// jump attack
+	self.th_missile = demon1_jump1;
+	self.th_pain = demon1_pain;
+
+	walkmonster_start();
 };

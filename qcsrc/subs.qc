@@ -23,10 +23,15 @@ void(entity attacker, float damage) SUB_null_pain = {};
 
 void() SUB_Remove = { remove(self); };
 
-/*
-QuakeEd only writes a single float for angles(bad idea), so up and down are
+/*============================================================================
+
+SetMovedir
+
+QuakeEd only writes a single float for angles (bad idea), so up and down are
 just constant angles.
-*/
+
+============================================================================*/
+
 void() SetMovedir =
 {
 	if (self.angles == '0 -1 0')
@@ -47,6 +52,7 @@ void() SetMovedir =
 InitTrigger
 
 ============================================================================*/
+
 void() InitTrigger =
 {
 	// trigger angles are used for one-way touches.  An angle of 0 is assumed
@@ -69,6 +75,7 @@ calculate self.velocity and self.nextthink to reach dest from
 self.origin traveling at speed
 
 ============================================================================*/
+
 void(entity ent, vector tdest, float tspeed, void() func) SUB_CalcMoveEnt =
 {
 	entity stemp;
@@ -138,14 +145,16 @@ void() SUB_CalcMoveDone =
 };
 
 /*============================================================================
+
 SUB_CalcAngleMove
 
 calculate self.avelocity and self.nextthink to reach destangle from
 self.angles rotating
 
 The calling function should make sure self.think is valid
-===============
-*/
+
+============================================================================*/
+
 void(entity ent, vector destangle, float tspeed, void() func) SUB_CalcAngleMoveEnt =
 {
 	entity stemp;
@@ -223,6 +232,7 @@ Search for(string)targetname in all entities that
 match(string)self.target and call their .use function
 
 ==========================================================================================*/
+
 void() SUB_UseTargets =
 {
 	entity t, stemp, otemp, act;
@@ -289,12 +299,14 @@ void() SUB_UseTargets =
 			activator = act;
 		} while (1);
 	}
-
-
 };
 
-// in nightmare mode, all attack_finished times become 0
-// some monsters refire twice automatically
+/*============================================================================
+
+In nightmare mode, all attack_finished times become 0
+Some monsters refire twice automatically
+
+============================================================================*/
 
 void(float normal) SUB_AttackFinished =
 {
@@ -303,8 +315,6 @@ void(float normal) SUB_AttackFinished =
 	if (skill != 3)
 		self.attack_finished = time + normal;
 };
-
-float(entity targ) visible;
 
 void(void() thinkst) SUB_CheckRefire =
 {

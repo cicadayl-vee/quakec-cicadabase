@@ -17,13 +17,9 @@
     See file, 'COPYING', for details.
 */
 
-void() movetarget_f;
-void() t_movetarget;
-void() knight_walk1;
-void() knight_bow6;
-void() knight_bow1;
-void(entity etemp, entity stemp, entity stemp, float dmg) T_Damage;
 float intermission_running;
+float sight_entity_time;
+entity sight_entity;
 
 /*============================================================================
 
@@ -56,9 +52,6 @@ will wake up even if they wouldn't have noticed the player
 
 ============================================================================*/
 
-entity sight_entity;
-float sight_entity_time;
-
 float(float v) anglemod =
 {
 	while (v >= 360)
@@ -85,6 +78,7 @@ The next spot to move to. If not present, stop here for good.
 The number of seconds to spend standing or bowing for path_stand or path_bow
 
 ============================================================================*/
+
 void() movetarget_f =
 {
 	if (!self.targetname)
@@ -96,9 +90,14 @@ void() movetarget_f =
 
 };
 
-/*QUAKED path_corner (0.5 0.3 0) (-8 -8 -8) (8 8 8)
+/*============================================================================
+
+path_corner
+
 Monsters will continue walking towards the next target corner.
-*/
+
+============================================================================*/
+
 void() path_corner =
 {
 	movetarget_f();
@@ -112,6 +111,7 @@ Something has bumped into a movetarget.  If it is a monster
 moving towards it, change the next destination and continue.
 
 ============================================================================*/
+
 void() t_movetarget =
 {
 	entity temp;
@@ -153,6 +153,7 @@ returns the range catagorization of an entity reletive to self
 3 only triggered by damage
 
 ============================================================================*/
+
 float(entity targ) range =
 {
 	vector spot1, spot2;
@@ -177,6 +178,7 @@ visible
 returns 1 if the entity is visible to self, even if not infront()
 
 ============================================================================*/
+
 float(entity targ) visible =
 {
 	vector spot1, spot2;
@@ -204,6 +206,7 @@ infront
 returns 1 if the entity is in front(in sight) of self
 
 ============================================================================*/
+
 float(entity targ) infront =
 {
 	vector vec;
@@ -304,6 +307,7 @@ checked each frame.  This means multi player games will have slightly
 slower noticing monsters.
 
 ============================================================================*/
+
 float() FindTarget =
 {
 	entity client;
@@ -377,15 +381,9 @@ float() FindTarget =
 	return TRUE;
 };
 
-void(float dist) ai_forward =
-{
-	walkmove(self.angles_y, dist);
-};
+void(float dist) ai_forward = { walkmove(self.angles_y, dist); };
 
-void(float dist) ai_back =
-{
-	walkmove((self.angles_y + 180), dist);
-};
+void(float dist) ai_back = { walkmove((self.angles_y + 180), dist); };
 
 /*============================================================================
 
@@ -394,15 +392,8 @@ ai_pain
 Stagger back a bit
 
 ============================================================================*/
-void(float dist) ai_pain =
-{
-	ai_back(dist);
-	/*
-	float away;
-	away = anglemod(vectoyaw(self.origin - self.enemy.origin) + 180 * (random() - 0.5));
-	walkmove(away, dist);
-	*/
-};
+
+void(float dist) ai_pain = { ai_back(dist); };
 
 /*============================================================================
 
@@ -411,10 +402,8 @@ ai_painforward
 Stagger back a bit
 
 ============================================================================*/
-void(float dist) ai_painforward =
-{
-	walkmove(self.ideal_yaw, dist);
-};
+
+void(float dist) ai_painforward = { walkmove(self.ideal_yaw, dist); };
 
 /*============================================================================
 
@@ -423,6 +412,7 @@ ai_walk
 The monster is walking its beat
 
 ============================================================================*/
+
 void(float dist) ai_walk =
 {
 	movedist = dist;
@@ -447,6 +437,7 @@ ai_stand
 The monster is staying in one place for a while, with slight angle turns
 
 ============================================================================*/
+
 void() ai_stand =
 {
 	if (FindTarget())
@@ -457,8 +448,6 @@ void() ai_stand =
 		self.th_walk();
 		return;
 	}
-
-	// change angle slightly
 };
 
 /*============================================================================
@@ -468,6 +457,7 @@ ai_turn
 don't move, but turn towards ideal_yaw
 
 ============================================================================*/
+
 void() ai_turn =
 {
 	if (FindTarget())
@@ -481,6 +471,7 @@ void() ai_turn =
 ChooseTurn
 
 ============================================================================*/
+
 void(vector dest3) ChooseTurn =
 {
 	vector dir, newdir;
@@ -511,21 +502,18 @@ void(vector dest3) ChooseTurn =
 FacingIdeal
 
 ============================================================================*/
+
 float() FacingIdeal =
 {
 	float delta;
 
 	delta = anglemod(self.angles_y - self.ideal_yaw);
+	
 	if (delta > 45 && delta < 315)
 		return FALSE;
+		
 	return TRUE;
 };
-
-float() WizardCheckAttack;
-float() DogCheckAttack;
-float() SoldierCheckAttack;
-float() ShamCheckAttack;
-float() OgreCheckAttack;
 
 float() CheckAnyAttack =
 {
@@ -553,6 +541,7 @@ ai_run_melee
 Turn and close until within an angle to launch a melee attack
 
 ============================================================================*/
+
 void() ai_run_melee =
 {
 	self.ideal_yaw = enemy_yaw;
@@ -572,10 +561,12 @@ ai_run_missile
 Turn in place until within an angle to launch a missile attack
 
 ============================================================================*/
+
 void() ai_run_missile =
 {
 	self.ideal_yaw = enemy_yaw;
 	ChangeYaw();
+	
 	if (FacingIdeal())
 	{
 		self.th_missile();
@@ -590,12 +581,14 @@ ai_run_slide
 Strafe sideways, but stay at aproximately the same range
 
 ============================================================================*/
+
 void() ai_run_slide =
 {
 	float ofs;
 
 	self.ideal_yaw = enemy_yaw;
 	ChangeYaw();
+	
 	if (self.lefty)
 		ofs = 90;
 	else
