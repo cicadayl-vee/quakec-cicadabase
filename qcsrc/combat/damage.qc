@@ -179,7 +179,7 @@ void(entity targ, entity inflictor, entity attacker, float damage) T_Damage =
 		return;
 
 	// do the damage
-	targ.health = targ.health - take;
+	targ.health = rint(targ.health - take);
 
 	if (targ.health <= 0)
 	{
