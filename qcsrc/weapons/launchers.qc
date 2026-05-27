@@ -103,7 +103,7 @@ void() W_FireRocket =
 
 	// set missile speed
 	makevectors(self.v_angle);
-	missile.velocity = aim(self, 1000);
+	missile.velocity = aim(self);
 	missile.velocity = missile.velocity * 1000;
 	missile.angles = vectoangles(missile.velocity);
 
@@ -183,7 +183,7 @@ void() W_FireGrenade =
 	}
 	else
 	{
-		missile.velocity = aim(self, 10000);
+		missile.velocity = aim(self);
 		missile.velocity = missile.velocity * 600;
 		missile.velocity_z = 200;
 	}

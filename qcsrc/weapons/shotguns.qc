@@ -135,7 +135,7 @@ void() W_FireShotgun =
 	self.punchangle_x = -2;
 
 	self.currentammo = self.ammo_shells = self.ammo_shells - 1;
-	dir = aim(self, 100000);
+	dir = aim(self);
 	FireBullets(6, dir, '0.04 0.04 0');
 };
 
@@ -160,6 +160,6 @@ void() W_FireSuperShotgun =
 	self.punchangle_x = -4;
 
 	self.currentammo = self.ammo_shells = self.ammo_shells - 2;
-	dir = aim(self, 100000);
+	dir = aim(self);
 	FireBullets(14, dir, '0.14 0.08 0');
 };

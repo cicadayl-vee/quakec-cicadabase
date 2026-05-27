@@ -793,7 +793,7 @@ float(vector v) pointcontents = #41;
 float(float f) fabs = #43;
 
 // returns the shooting vector
-vector(entity e, float speed) aim = #44;
+vector(entity e) aim = #44;
 
 // return cvar.value
 float(string s) cvar = #45;
