@@ -17,13 +17,9 @@
     See file, 'COPYING', for details.
 */
 
-float DOOR_START_OPEN = 1;
-float DOOR_DONT_LINK = 4;
-float DOOR_GOLD_KEY = 8;
-float DOOR_SILVER_KEY = 16;
-float DOOR_TOGGLE = 32;
-
 /*============================================================================
+
+DOORS
 
 Doors are similar to buttons, but can spawn a fat trigger field around them
 to open without a touch, and they link together to form simultanious
@@ -35,6 +31,12 @@ If multiple doors, all will point to a single one.
 Door.enemy chains from the master door through all doors linked in the chain.
 
 ============================================================================*/
+
+float DOOR_START_OPEN = 1;
+float DOOR_DONT_LINK = 4;
+float DOOR_GOLD_KEY = 8;
+float DOOR_SILVER_KEY = 16;
+float DOOR_TOGGLE = 32;
 
 /*============================================================================
 

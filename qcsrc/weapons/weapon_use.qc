@@ -17,6 +17,12 @@
     See file, 'COPYING', for details.
 */
 
+/*============================================================================
+
+WEAPON FUNCTIONS
+
+============================================================================*/
+
 void() W_SetCurrentAmmo =
 {
 	// get out of any weapon firing states

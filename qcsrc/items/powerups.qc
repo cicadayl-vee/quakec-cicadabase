@@ -17,6 +17,12 @@
     See file, 'COPYING', for details.
 */
 
+/*============================================================================
+
+POWERUPS
+
+============================================================================*/
+
 float modelindex_eyes, modelindex_player;
 
 void() powerup_touch =

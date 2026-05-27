@@ -17,6 +17,12 @@
     See file, 'COPYING', for details.
 */
 
+/*============================================================================
+
+PLAYER OBITUARIES
+
+============================================================================*/
+
 void(entity targ, entity attacker) ClientObituary =
 {
 	float rnum;

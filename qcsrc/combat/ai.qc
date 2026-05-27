@@ -17,6 +17,12 @@
     See file, 'COPYING', for details.
 */
 
+/*============================================================================
+
+AI MOVEMENT
+
+============================================================================*/
+
 float intermission_running;
 float sight_entity_time;
 entity sight_entity;
