@@ -493,3 +493,28 @@ void() NextLevel =
 		o.nextthink = time + 0.1;
 	}
 };
+
+void() CheckRules =
+{
+	float timelimit;
+	float fraglimit;
+
+	// someone else quit the game already
+	if (gameover)
+		return;
+
+	timelimit = cvar("timelimit") * 60;
+	fraglimit = cvar("fraglimit");
+
+	if (timelimit && time >= timelimit)
+	{
+		NextLevel();
+		return;
+	}
+
+	if (fraglimit && self.frags >= fraglimit)
+	{
+		NextLevel();
+		return;
+	}
+};

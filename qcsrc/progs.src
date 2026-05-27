@@ -46,7 +46,6 @@ func/misc.qc
 
 // client
 client/spawn.qc
-client/rules.qc
 client/obituary.qc
 client/player.qc	// bulk of client was moved here
 
