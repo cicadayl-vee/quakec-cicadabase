@@ -915,9 +915,6 @@ void() monster_death_use;
 // item_func.qc
 void() W_SetCurrentAmmo;
 
-// health.qc
-void() health_touch;
-
 // ammo.qc
 float() W_BestWeapon;
 

@@ -79,42 +79,6 @@ void CheckHealthRot()
 	self.healthrot_nextcheck = 0;
 };
 
-void() item_health =
-{
-	self.touch = health_touch;
-
-	if (self.spawnflags & H_ROTTEN)
-	{
-		precache_model("maps/b_bh10.bsp");
-
-		precache_sound("items/r_item1.wav");
-		setmodel(self, "maps/b_bh10.bsp");
-		self.noise = "items/r_item1.wav";
-		self.healamount = 15;
-		self.healtype = 0;
-	}
-	else if (self.spawnflags & H_MEGA)
-	{
-		precache_model("maps/b_bh100.bsp");
-		precache_sound("items/r_item2.wav");
-		setmodel(self, "maps/b_bh100.bsp");
-		self.noise = "items/r_item2.wav";
-		self.healamount = 100;
-		self.healtype = 2;
-	}
-	else
-	{
-		precache_model("maps/b_bh25.bsp");
-		precache_sound("items/health1.wav");
-		setmodel(self, "maps/b_bh25.bsp");
-		self.noise = "items/health1.wav";
-		self.healamount = 25;
-		self.healtype = 1;
-	}
-	setsize(self, '0 0 0', '32 32 56');
-	StartItem();
-};
-
 void() health_touch =
 {
 	string s;
@@ -175,4 +139,40 @@ void() health_touch =
 	
 	// fire all targets/killtargets
 	SUB_UseTargets();
+};
+
+void() item_health =
+{
+	self.touch = health_touch;
+
+	if (self.spawnflags & H_ROTTEN)
+	{
+		precache_model("maps/b_bh10.bsp");
+
+		precache_sound("items/r_item1.wav");
+		setmodel(self, "maps/b_bh10.bsp");
+		self.noise = "items/r_item1.wav";
+		self.healamount = 15;
+		self.healtype = 0;
+	}
+	else if (self.spawnflags & H_MEGA)
+	{
+		precache_model("maps/b_bh100.bsp");
+		precache_sound("items/r_item2.wav");
+		setmodel(self, "maps/b_bh100.bsp");
+		self.noise = "items/r_item2.wav";
+		self.healamount = 100;
+		self.healtype = 2;
+	}
+	else
+	{
+		precache_model("maps/b_bh25.bsp");
+		precache_sound("items/health1.wav");
+		setmodel(self, "maps/b_bh25.bsp");
+		self.noise = "items/health1.wav";
+		self.healamount = 25;
+		self.healtype = 1;
+	}
+	setsize(self, '0 0 0', '32 32 56');
+	StartItem();
 };
