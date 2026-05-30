@@ -135,7 +135,7 @@ void() t_movetarget =
 
 	// play chainsaw drag sound
 	if (self.classname == "monster_ogre")
-		sound(self, CHAN_VOICE, "ogre/ogdrag.wav", 1, ATTN_IDLE);
+		sound(self, CHAN_AUTO, "ogre/ogdrag.wav", 1, ATTN_IDLE);
 
 	//dprint("t_movetarget\n");
 	self.goalentity = self.movetarget = find(world, targetname, other.target);
