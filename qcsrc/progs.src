@@ -39,6 +39,7 @@ func/plats.qc
 func/trains.qc
 func/intermission.qc
 func/triggers.qc
+func/teleporters.qc
 func/traps.qc
 func/lights.qc
 func/ambient.qc
