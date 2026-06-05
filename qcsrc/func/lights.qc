@@ -75,19 +75,19 @@ void InitLightStyles()
 
 //============================================================================
 
-float START_OFF = 1;
+float SPAWNFLAG_LIT_START_OFF = 1;
 
 void() light_use =
 {
-	if (self.spawnflags & START_OFF)
+	if (self.spawnflags & SPAWNFLAG_LIT_START_OFF)
 	{
 		lightstyle(self.style, "m");
-		self.spawnflags = self.spawnflags - START_OFF;
+		self.spawnflags = self.spawnflags - SPAWNFLAG_LIT_START_OFF;
 	}
 	else
 	{
 		lightstyle(self.style, "a");
-		self.spawnflags = self.spawnflags + START_OFF;
+		self.spawnflags = self.spawnflags + SPAWNFLAG_LIT_START_OFF;
 	}
 };
 
@@ -103,7 +103,7 @@ void() light =
 	if (self.style >= 32)
 	{
 		self.use = light_use;
-		if (self.spawnflags & START_OFF)
+		if (self.spawnflags & SPAWNFLAG_LIT_START_OFF)
 			lightstyle(self.style, "a");
 		else
 			lightstyle(self.style, "m");
@@ -115,7 +115,7 @@ void() light_fluoro =
 	if (self.style >= 32)
 	{
 		self.use = light_use;
-		if (self.spawnflags & START_OFF)
+		if (self.spawnflags & SPAWNFLAG_LIT_START_OFF)
 			lightstyle(self.style, "a");
 		else
 			lightstyle(self.style, "m");

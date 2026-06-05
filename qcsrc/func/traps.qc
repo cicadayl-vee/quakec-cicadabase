@@ -23,12 +23,12 @@ TRAPS
 
 ============================================================================*/
 
-float SPAWNFLAG_SUPERSPIKE = 1;
-float SPAWNFLAG_LASER = 2;
+float SPAWNFLAG_TRAP_SUPERSPIKE = 1;
+float SPAWNFLAG_TRAP_LASER = 2;
 
 void() spikeshooter_use =
 {
-	if (self.spawnflags & SPAWNFLAG_LASER)
+	if (self.spawnflags & SPAWNFLAG_TRAP_LASER)
 	{
 		sound(self, CHAN_VOICE, "enforcer/enfire.wav", 1, ATTN_NORM);
 		LaunchLaser(self.origin, self.movedir);
@@ -38,7 +38,7 @@ void() spikeshooter_use =
 		sound(self, CHAN_VOICE, "weapons/spike2.wav", 1, ATTN_NORM);
 		launch_spike(self.origin, self.movedir);
 		newmis.velocity = self.movedir * 500;
-		if (self.spawnflags & SPAWNFLAG_SUPERSPIKE)
+		if (self.spawnflags & SPAWNFLAG_TRAP_SUPERSPIKE)
 			newmis.touch = superspike_touch;
 	}
 };
@@ -54,7 +54,7 @@ void() trap_spikeshooter =
 {
 	SetMovedir();
 	self.use = spikeshooter_use;
-	if (self.spawnflags & SPAWNFLAG_LASER)
+	if (self.spawnflags & SPAWNFLAG_TRAP_LASER)
 	{
 		precache_model2("progs/laser.mdl");
 

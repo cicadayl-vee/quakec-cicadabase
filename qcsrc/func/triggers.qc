@@ -23,8 +23,8 @@ TRIGGERS
 
 ============================================================================*/
 
-float SPAWNFLAG_NOMESSAGE = 1;
-float SPAWNFLAG_NOTOUCH = 1;
+float SPAWNFLAG_TRIG_NOMESSAGE = 1;
+float SPAWNFLAG_TRIG_NOTOUCH = 1;
 
 entity s;
 
@@ -145,7 +145,7 @@ void() trigger_multiple =
 
 	if (self.health)
 	{
-		if (self.spawnflags & SPAWNFLAG_NOTOUCH)
+		if (self.spawnflags & SPAWNFLAG_TRIG_NOTOUCH)
 			objerror("health and notouch don't make sense\n");
 		self.max_health = self.health;
 		self.th_die = multi_killed;
@@ -157,7 +157,7 @@ void() trigger_multiple =
 	}
 	else
 	{
-		if (!(self.spawnflags & SPAWNFLAG_NOTOUCH))
+		if (!(self.spawnflags & SPAWNFLAG_TRIG_NOTOUCH))
 		{
 			self.touch = multi_touch;
 		}
@@ -206,7 +206,7 @@ void() counter_use =
 
 	if (self.count != 0)
 	{
-		if (activator.classname == "player" && (self.spawnflags & SPAWNFLAG_NOMESSAGE) == 0)
+		if (activator.classname == "player" && (self.spawnflags & SPAWNFLAG_TRIG_NOMESSAGE) == 0)
 		{
 			if (self.count >= 4)
 				centerprint(activator, "There are more to go...");
@@ -220,7 +220,7 @@ void() counter_use =
 		return;
 	}
 
-	if (activator.classname == "player" && (self.spawnflags & SPAWNFLAG_NOMESSAGE) == 0)
+	if (activator.classname == "player" && (self.spawnflags & SPAWNFLAG_TRIG_NOMESSAGE) == 0)
 		centerprint(activator, "Sequence completed!");
 
 	self.enemy = activator;
@@ -242,8 +242,8 @@ TELEPORT TRIGGERS
 
 ============================================================================*/
 
-float PLAYER_ONLY = 1;
-float SILENT = 2;
+float SPAWNFLAG_TELE_PLAYER_ONLY = 1;
+float SPAWNFLAG_TELE_SILENT = 2;
 
 void() play_teleport =
 {
@@ -315,13 +315,10 @@ void() tdeath_touch =
 			T_Damage(self.owner, self, self, 50000);
 			return;
 		}
-
 	}
 
 	if (other.health)
-	{
 		T_Damage(other, self, self, 50000);
-	}
 };
 
 void(vector org, entity death_owner) spawn_tdeath =
@@ -356,7 +353,7 @@ void() teleport_touch =
 			return;
 	}
 
-	if (self.spawnflags & PLAYER_ONLY)
+	if (self.spawnflags & SPAWNFLAG_TELE_PLAYER_ONLY)
 	{
 		if (other.classname != "player")
 			return;
@@ -434,7 +431,7 @@ void() trigger_teleport =
 		objerror("no target");
 	self.use = teleport_use;
 
-	if (!(self.spawnflags & SILENT))
+	if (!(self.spawnflags & SPAWNFLAG_TELE_SILENT))
 	{
 		precache_sound("ambience/hum1.wav");
 		o = (self.mins + self.maxs) * 0.5;
@@ -527,7 +524,7 @@ void() trigger_hurt =
 
 //============================================================================
 
-float PUSH_ONCE = 1;
+float SPAWNFLAG_PUSH_ONCE = 1;
 
 void() trigger_push_touch =
 {
@@ -545,7 +542,7 @@ void() trigger_push_touch =
 			}
 		}
 	}
-	if (self.spawnflags & PUSH_ONCE)
+	if (self.spawnflags & SPAWNFLAG_PUSH_ONCE)
 		remove(self);
 };
 

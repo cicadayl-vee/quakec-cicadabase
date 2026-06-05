@@ -23,8 +23,8 @@ HEALTH
 
 ============================================================================*/
 
-float H_ROTTEN = 1;
-float H_MEGA = 2;
+float SPAWNFLAG_HEATH_ROTTEN = 1;
+float SPAWNFLAG_HEATH_MEGA = 2;
 
 /*============================================================================
 
@@ -145,7 +145,7 @@ void() item_health =
 {
 	self.touch = health_touch;
 
-	if (self.spawnflags & H_ROTTEN)
+	if (self.spawnflags & SPAWNFLAG_HEATH_ROTTEN)
 	{
 		precache_model("maps/b_bh10.bsp");
 
@@ -155,7 +155,7 @@ void() item_health =
 		self.healamount = 15;
 		self.healtype = 0;
 	}
-	else if (self.spawnflags & H_MEGA)
+	else if (self.spawnflags & SPAWNFLAG_HEATH_MEGA)
 	{
 		precache_model("maps/b_bh100.bsp");
 		precache_sound("items/r_item2.wav");

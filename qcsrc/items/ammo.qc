@@ -23,11 +23,11 @@ AMMO
 
 ============================================================================*/
 
-float WEAPON_BIG2 = 1;
-float WEAPON_SHOTGUN = 1;
-float WEAPON_ROCKET = 2;
-float WEAPON_SPIKES = 4;
-float WEAPON_BIG = 8;
+float SPAWNFLAG_WEAPON_BIG2 = 1;
+float SPAWNFLAG_WEAPON_SHOTGUN = 1;
+float SPAWNFLAG_WEAPON_ROCKET = 2;
+float SPAWNFLAG_WEAPON_SPIKES = 4;
+float SPAWNFLAG_WEAPON_BIG = 8;
 
 void() bound_other_ammo =
 {
@@ -360,7 +360,7 @@ void() item_shells =
 {
 	self.touch = ammo_touch;
 
-	if (self.spawnflags & WEAPON_BIG2)
+	if (self.spawnflags & SPAWNFLAG_WEAPON_BIG2)
 	{
 		precache_model("maps/b_shell1.bsp");
 		setmodel(self, "maps/b_shell1.bsp");
@@ -382,7 +382,7 @@ void() item_spikes =
 {
 	self.touch = ammo_touch;
 
-	if (self.spawnflags & WEAPON_BIG2)
+	if (self.spawnflags & SPAWNFLAG_WEAPON_BIG2)
 	{
 		precache_model("maps/b_nail1.bsp");
 		setmodel(self, "maps/b_nail1.bsp");
@@ -404,7 +404,7 @@ void() item_rockets =
 {
 	self.touch = ammo_touch;
 
-	if (self.spawnflags & WEAPON_BIG2)
+	if (self.spawnflags & SPAWNFLAG_WEAPON_BIG2)
 	{
 		precache_model("maps/b_rock1.bsp");
 		setmodel(self, "maps/b_rock1.bsp");
@@ -426,7 +426,7 @@ void() item_cells =
 {
 	self.touch = ammo_touch;
 
-	if (self.spawnflags & WEAPON_BIG2)
+	if (self.spawnflags & SPAWNFLAG_WEAPON_BIG2)
 	{
 		precache_model("maps/b_batt1.bsp");
 		setmodel(self, "maps/b_batt1.bsp");
@@ -456,9 +456,9 @@ void() item_weapon =
 {
 	self.touch = ammo_touch;
 
-	if (self.spawnflags & WEAPON_SHOTGUN)
+	if (self.spawnflags & SPAWNFLAG_WEAPON_SHOTGUN)
 	{
-		if (self.spawnflags & WEAPON_BIG)
+		if (self.spawnflags & SPAWNFLAG_WEAPON_BIG)
 		{
 			precache_model("maps/b_shell1.bsp");
 			setmodel(self, "maps/b_shell1.bsp");
@@ -474,9 +474,9 @@ void() item_weapon =
 		self.netname = "shells";
 	}
 
-	if (self.spawnflags & WEAPON_SPIKES)
+	if (self.spawnflags & SPAWNFLAG_WEAPON_SPIKES)
 	{
-		if (self.spawnflags & WEAPON_BIG)
+		if (self.spawnflags & SPAWNFLAG_WEAPON_BIG)
 		{
 			precache_model("maps/b_nail1.bsp");
 			setmodel(self, "maps/b_nail1.bsp");
@@ -492,9 +492,9 @@ void() item_weapon =
 		self.netname = "nails";
 	}
 
-	if (self.spawnflags & WEAPON_ROCKET)
+	if (self.spawnflags & SPAWNFLAG_WEAPON_ROCKET)
 	{
-		if (self.spawnflags & WEAPON_BIG)
+		if (self.spawnflags & SPAWNFLAG_WEAPON_BIG)
 		{
 			precache_model("maps/b_rock1.bsp");
 			setmodel(self, "maps/b_rock1.bsp");

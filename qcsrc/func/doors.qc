@@ -32,11 +32,11 @@ Door.enemy chains from the master door through all doors linked in the chain.
 
 ============================================================================*/
 
-float DOOR_START_OPEN = 1;
-float DOOR_DONT_LINK = 4;
-float DOOR_GOLD_KEY = 8;
-float DOOR_SILVER_KEY = 16;
-float DOOR_TOGGLE = 32;
+float SPAWNFLAG_DOOR_START_OPEN = 1;
+float SPAWNFLAG_DOOR_DONT_LINK = 4;
+float SPAWNFLAG_DOOR_GOLD_KEY = 8;
+float SPAWNFLAG_DOOR_SILVER_KEY = 16;
+float SPAWNFLAG_DOOR_TOGGLE = 32;
 
 /*============================================================================
 
@@ -66,7 +66,7 @@ void() door_hit_top =
 	self.state = STATE_TOP;
 
 	// don't come down automatically
-	if (self.spawnflags & DOOR_TOGGLE)
+	if (self.spawnflags & SPAWNFLAG_DOOR_TOGGLE)
 		return;
 
 	self.think = door_go_down;
@@ -134,7 +134,7 @@ void() door_fire =
 	self.message = string_null;
 	oself = self;
 
-	if (self.spawnflags & DOOR_TOGGLE)
+	if (self.spawnflags & SPAWNFLAG_DOOR_TOGGLE)
 	{
 		if (self.state == STATE_UP || self.state == STATE_TOP)
 		{
@@ -481,9 +481,9 @@ void() func_door =
 	self.blocked = door_blocked;
 	self.use = door_use;
 
-	if (self.spawnflags & DOOR_SILVER_KEY)
+	if (self.spawnflags & SPAWNFLAG_DOOR_SILVER_KEY)
 		self.items = IT_KEY1;
-	if (self.spawnflags & DOOR_GOLD_KEY)
+	if (self.spawnflags & SPAWNFLAG_DOOR_GOLD_KEY)
 		self.items = IT_KEY2;
 
 	if (!self.speed)
@@ -500,7 +500,7 @@ void() func_door =
 
 	// DOOR_START_OPEN is to allow an entity to be lighted in the closed position
 	// but spawn in the open position
-	if (self.spawnflags & DOOR_START_OPEN)
+	if (self.spawnflags & SPAWNFLAG_DOOR_START_OPEN)
 	{
 		setorigin(self, self.pos2);
 		self.pos2 = self.pos1;
@@ -532,11 +532,11 @@ SECRET DOORS
 
 ============================================================================*/
 
-float SECRET_OPEN_ONCE = 1;		// stays open
-float SECRET_1ST_LEFT = 2;		// 1st move is left of arrow
-float SECRET_1ST_DOWN = 4;		// 1st move is down from arrow
-float SECRET_NO_SHOOT = 8;		// only opened by trigger
-float SECRET_YES_SHOOT = 16;		// shootable even if targeted
+float SPAWNFLAG_SECRET_OPEN_ONCE = 1;		// stays open
+float SPAWNFLAG_SECRET_1ST_LEFT = 2;		// 1st move is left of arrow
+float SPAWNFLAG_SECRET_1ST_DOWN = 4;		// 1st move is down from arrow
+float SPAWNFLAG_SECRET_NO_SHOOT = 8;		// only opened by trigger
+float SPAWNFLAG_SECRET_YES_SHOOT = 16;		// shootable even if targeted
 
 void() fd_secret_use =
 {
@@ -554,7 +554,7 @@ void() fd_secret_use =
 	// fire all targets/killtargets
 	SUB_UseTargets();
 
-	if (!(self.spawnflags & SECRET_NO_SHOOT))
+	if (!(self.spawnflags & SPAWNFLAG_SECRET_NO_SHOOT))
 	{
 		self.th_pain = SUB_null_pain;
 		self.takedamage = DAMAGE_NO;
@@ -566,12 +566,12 @@ void() fd_secret_use =
 	self.nextthink = self.ltime + 0.1;
 
 	// 1 or -1
-	temp = 1 - (self.spawnflags & SECRET_1ST_LEFT);
+	temp = 1 - (self.spawnflags & SPAWNFLAG_SECRET_1ST_LEFT);
 	makevectors(self.mangle);
 
 	if (!self.t_width)
 	{
-		if (self.spawnflags & SECRET_1ST_DOWN)
+		if (self.spawnflags & SPAWNFLAG_SECRET_1ST_DOWN)
 			self. t_width = fabs(v_up * self.size);
 		else
 			self. t_width = fabs(v_right * self.size);
@@ -580,7 +580,7 @@ void() fd_secret_use =
 	if (!self.t_length)
 		self. t_length = fabs(v_forward * self.size);
 
-	if (self.spawnflags & SECRET_1ST_DOWN)
+	if (self.spawnflags & SPAWNFLAG_SECRET_1ST_DOWN)
 		self.dest1 = self.origin - v_up * self.t_width;
 	else
 		self.dest1 = self.origin + v_right * (self.t_width * temp);
@@ -614,7 +614,7 @@ void() fd_secret_move2 =
 void() fd_secret_move3 =
 {
 	sound(self, CHAN_VOICE, self.noise3, 1, ATTN_NORM);
-	if (!(self.spawnflags & SECRET_OPEN_ONCE))
+	if (!(self.spawnflags & SPAWNFLAG_SECRET_OPEN_ONCE))
 	{
 		self.nextthink = self.ltime + self.wait;
 		self.think = fd_secret_move4;
@@ -644,7 +644,7 @@ void() fd_secret_move6 =
 
 void() fd_secret_done =
 {
-	if (!self.targetname || self.spawnflags & SECRET_YES_SHOOT)
+	if (!self.targetname || self.spawnflags & SPAWNFLAG_SECRET_YES_SHOOT)
 	{
 		self.health = 10000;
 		self.takedamage = DAMAGE_YES;
@@ -732,7 +732,7 @@ void() func_door_secret =
 	self.blocked = secret_blocked;
 	self.speed = 50;
 	self.use = fd_secret_use;
-	if (!self.targetname || self.spawnflags & SECRET_YES_SHOOT)
+	if (!self.targetname || self.spawnflags & SPAWNFLAG_SECRET_YES_SHOOT)
 	{
 		self.health = 10000;
 		self.takedamage = DAMAGE_YES;
