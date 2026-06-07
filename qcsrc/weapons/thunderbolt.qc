@@ -74,6 +74,12 @@ void(vector p1, vector p2, entity from, float damage) LightningDamage =
 	}
 };
 
+/*=============================================================================
+
+W_FireLightning
+
+=============================================================================*/
+
 void() W_FireLightning =
 {
 	vector org;

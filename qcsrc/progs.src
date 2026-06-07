@@ -43,6 +43,7 @@ func/teleporters.qc
 func/traps.qc
 func/lights.qc
 func/ambient.qc
+func/enviroment.qc
 func/misc.qc
 
 // client

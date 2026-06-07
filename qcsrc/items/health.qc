@@ -141,6 +141,16 @@ void() health_touch =
 	SUB_UseTargets();
 };
 
+/*============================================================================
+
+item_health
+
+Health box. Normally gives 25 points. Rotten box heals 15 points,
+Hegahealth will add 100 health, then rot you down to your maximum 
+health limit, one point per second.
+
+============================================================================*/
+
 void() item_health =
 {
 	self.touch = health_touch;

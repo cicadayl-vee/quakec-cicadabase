@@ -54,7 +54,7 @@ void() monster_use =
 
 monster_death_use
 
-When a mosnter dies, it fires all of its targets with the current
+When a monster dies, it fires all of its targets with the current
 enemy as activator.
 
 ============================================================================*/
@@ -73,6 +73,12 @@ void() monster_death_use =
 	activator = self.enemy;
 	SUB_UseTargets();
 };
+
+/*============================================================================
+
+walkmonster
+
+============================================================================*/
 
 void() walkmonster_start_go =
 {
@@ -135,6 +141,12 @@ void() walkmonster_start =
 	total_monsters = total_monsters + 1;
 };
 
+/*============================================================================
+
+flymonster
+
+============================================================================*/
+
 void() flymonster_start_go =
 {
 	self.takedamage = DAMAGE_AIM;
@@ -187,6 +199,12 @@ void() flymonster_start =
 	self.think = flymonster_start_go;
 	total_monsters = total_monsters + 1;
 };
+
+/*============================================================================
+
+swimmonster
+
+============================================================================*/
 
 void() swimmonster_start_go =
 {

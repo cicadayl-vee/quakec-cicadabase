@@ -71,6 +71,20 @@ void() key_setsounds =
 	}
 };
 
+/*============================================================================
+
+item_key
+
+SILVER or GOLD key.
+
+In order for keys to work you MUST set your maps worldtype to one of the
+following:
+0: medieval
+1: metal
+2: base
+
+============================================================================*/
+
 void() item_key1 =
 {
 	if (world.worldtype == 0)

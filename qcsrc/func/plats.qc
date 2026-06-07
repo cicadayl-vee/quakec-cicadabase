@@ -147,18 +147,32 @@ void() plat_use =
 	plat_go_down();
 };
 
+/*============================================================================
+
+func_plat
+
+Plats are always drawn in the extended position, so they will light correctly.
+
+If the plat is the target of another trigger or button, 
+it will start out disabled in the extended position until it is trigger, 
+when it will lower and become a normal plat.
+
+If the "height" key is set, that will determine the amount the plat moves, 
+instead of being implicitly determined by the model's height.
+
+"speed"		default 150
+"height"	default 0
+
+"sounds"
+1: base fast
+2: chain slow
+
+============================================================================*/
+
 void() func_plat =
 {
-	if (!self.t_length)
-		self.t_length = 80;
-	if (!self.t_width)
-		self.t_width = 10;
-
 	if (self.sounds == 0)
 		self.sounds = 2;
-
-	// FIX THIS TO LOAD A GENERIC PLAT SOUND
-
 	if (self.sounds == 1)
 	{
 		precache_sound("plats/plat1.wav");
@@ -166,7 +180,6 @@ void() func_plat =
 		self.noise = "plats/plat1.wav";
 		self.noise1 = "plats/plat2.wav";
 	}
-
 	if (self.sounds == 2)
 	{
 		precache_sound("plats/medplat1.wav");
@@ -174,6 +187,13 @@ void() func_plat =
 		self.noise = "plats/medplat1.wav";
 		self.noise1 = "plats/medplat2.wav";
 	}
+	
+	if (!self.t_length)
+		self.t_length = 80;
+	if (!self.t_width)
+		self.t_width = 10;
+	if (!self.speed)
+		self.speed = 150;
 
 	self.mangle = self.angles;
 	self.angles = '0 0 0';
@@ -186,8 +206,6 @@ void() func_plat =
 	setsize(self, self.mins, self.maxs);
 
 	self.blocked = plat_crush;
-	if (!self.speed)
-		self.speed = 150;
 
 	// pos1 is the top position, pos2 is the bottom
 	self.pos1 = self.origin;

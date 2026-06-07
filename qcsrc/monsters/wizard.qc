@@ -381,6 +381,12 @@ void(entity attacker, float damage) Wiz_Pain =
 
 void() Wiz_Missile = { wiz_fast1(); };
 
+/*============================================================================
+
+monster_wizard
+
+============================================================================*/
+
 void() monster_wizard =
 {
 	if (deathmatch)

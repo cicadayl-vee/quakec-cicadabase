@@ -248,6 +248,17 @@ void() CheckPowerups =
 	}
 };
 
+/*============================================================================
+
+item_artifact
+
+invulnerability: Player is invulnerable for 30 seconds.
+envirosuit: Player takes no damage from water or slime for 30 seconds.
+invisibility: Player is invisible for 30 seconds.
+super_damage: The next attack from the player will do 4x damage.
+
+============================================================================*/
+
 void() item_artifact_invulnerability =
 {
 	self.touch = powerup_touch;

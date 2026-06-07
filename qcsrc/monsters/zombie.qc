@@ -478,6 +478,12 @@ void(entity attacker, float take) zombie_pain =
 		zombie_paind1();
 };
 
+/*============================================================================
+
+monster_zombie
+
+============================================================================*/
+
 void() monster_zombie =
 {
 	if (deathmatch)

@@ -184,6 +184,15 @@ void() teleport_touch =
 	other.flags = other.flags - other.flags & FL_ONGROUND;
 };
 
+/*============================================================================
+
+info_teleport_destination
+
+This is the destination marker for a teleporter. 
+It should have a "targetname" field with the same value as a teleporter's "target" field.
+
+============================================================================*/
+
 void() info_teleport_destination =
 {
 	// this does nothing, just serves as a target spot
@@ -202,6 +211,17 @@ void() teleport_use =
 	force_retouch = 2;
 	self.think = SUB_Null;
 };
+
+/*============================================================================
+
+trigger_teleport
+
+Any object touching this will be transported to the corresponding info_teleport_destination entity. 
+You must set the "target" field, and create an object with a "targetname" field that matches.
+
+If the trigger_teleport has a targetname, it will only teleport entities when it has been fired.
+
+============================================================================*/
 
 void() trigger_teleport =
 {

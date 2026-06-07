@@ -86,6 +86,25 @@ void() func_train_find =
 	}
 };
 
+/*============================================================================
+
+func_train
+
+Trains are moving platforms that players can ride.
+
+The targets origin specifies the min point of the train at each corner.
+
+The train spawns at the first target it is pointing at.
+If the train is the target of a button or trigger, it will not begin moving until activated.
+
+"speed"		default 100
+"dmg"		default	2
+
+"sounds"
+1: ratchet metal
+
+============================================================================*/
+
 void() func_train =
 {
 	if (!self.speed)
@@ -127,6 +146,14 @@ void() func_train =
 	self.nextthink = self.ltime + 0.1;
 	self.think = func_train_find;
 };
+
+/*============================================================================
+
+misc_teleporttrain
+
+This is used for the final boss.
+
+============================================================================*/
 
 void() misc_teleporttrain =
 {

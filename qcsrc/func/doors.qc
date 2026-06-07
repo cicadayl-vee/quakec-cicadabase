@@ -21,15 +21,6 @@
 
 DOORS
 
-Doors are similar to buttons, but can spawn a fat trigger field around them
-to open without a touch, and they link together to form simultanious
-double/quad doors.
-
-Door.owner is the master door.  If there is only one door, it points to itself.
-If multiple doors, all will point to a single one.
-
-Door.enemy chains from the master door through all doors linked in the chain.
-
 ============================================================================*/
 
 float SPAWNFLAG_DOOR_START_OPEN = 1;
@@ -41,6 +32,15 @@ float SPAWNFLAG_DOOR_TOGGLE = 32;
 /*============================================================================
 
 THINK FUNCTIONS
+
+Doors are similar to buttons, but can spawn a fat trigger field around them
+to open without a touch, and they link together to form simultanious
+double/quad doors.
+
+Door.owner is the master door.  If there is only one door, it points to itself.
+If multiple doors, all will point to a single one.
+
+Door.enemy chains from the master door through all doors linked in the chain.
 
 ============================================================================*/
 
@@ -406,6 +406,38 @@ void() LinkDoors =
 
 };
 
+/*============================================================================
+
+func_door
+
+If two doors touch, they are assumed to be connected and operate as a unit.
+
+TOGGLE causes the door to wait in both the start and end states for a trigger event.
+
+START_OPEN causes the door to move to its destination when spawned, and operate in reverse.
+It is used to temporarily or permanently close off an area when triggered 
+(not useful for touch or takedamage doors).
+
+Key doors are allways wait -1.
+
+"message"	is printed when the door is touched if it is a trigger door and it hasn't been fired yet
+"angle"		determines the opening direction
+"targetname"    if set, no touch field will be spawned and a remote button or trigger field activates the door.
+"health"	if set, door must be shot open
+"speed"		movement speed (100 default)
+"wait"		wait before returning (3 default, -1 = never return)
+"lip"		lip remaining at end of move (8 default)
+"dmg"		damage to inflict when blocked (2 default)
+
+"sounds"
+0: no sound
+1: stone
+2: base
+3: stone chain
+4: screechy metal
+
+============================================================================*/
+
 void() func_door =
 {
 	if (world.worldtype == 0)
@@ -685,6 +717,28 @@ void() secret_touch =
 		sound(other, CHAN_BODY, "misc/talk.wav", 1, ATTN_NORM);
 	}
 };
+
+/*============================================================================
+
+func_door_secret
+
+Basic secret door. Slides back, then to the side. Angle determines direction.
+If a secret door has a targetname, it will only be opened by it's botton or trigger, not by damage.
+
+"wait"  		# of seconds before coming back
+"1st_left" 		1st move is left of arrow
+"1st_down" 		1st move is down from arrow
+"always_shoot" 		even if targeted, keep shootable
+"t_width" 		override WIDTH to move back (or height if going down)
+"t_length" 		override LENGTH to move sideways
+"dmg"			damage to inflict when blocked (2 default)
+
+"sounds"
+1: medieval
+2: metal
+3: base
+
+============================================================================*/
 
 void() func_door_secret =
 {

@@ -187,6 +187,12 @@ void() f_pain9  = [ $pain9, f_run1 ] { ai_pain(6); };
 // fish always do pain frames
 void(entity attacker, float damage) fish_pain = { f_pain1(); };
 
+/*============================================================================
+
+monster_fish
+
+============================================================================*/
+
 void() monster_fish =
 {
 	if (deathmatch)

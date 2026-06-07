@@ -101,7 +101,7 @@ void() superspike_touch =
 
 launch_spike
 
-Used for both the player and the ogre
+Used for the player, wizard, hknight, and traps.
 
 ============================================================================*/
 

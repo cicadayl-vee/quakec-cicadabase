@@ -26,6 +26,14 @@ SIMPLE BMODELS
 // change to alternate textures
 void() func_wall_use = { self.frame = 1 - self.frame; };
 
+/*============================================================================
+
+func_wall
+
+This is just a solid wall if not inhibitted.
+
+============================================================================*/
+
 void() func_wall =
 {
 	self.angles = '0 0 0';
@@ -36,6 +44,14 @@ void() func_wall =
 	setmodel(self, self.model);
 };
 
+/*============================================================================
+
+func_illusionary
+
+A simple entity that looks solid but lets you walk through it.
+
+============================================================================*/
+
 void() func_illusionary =
 {
 	self.angles = '0 0 0';
@@ -43,6 +59,15 @@ void() func_illusionary =
 	self.solid = SOLID_NOT;
 	setmodel(self, self.model);
 };
+
+/*============================================================================
+
+func_episodegate
+
+This bmodel will appear if the episode has already been completed, 
+so players can't re-enter it.
+
+============================================================================*/
 
 void() func_episodegate =
 {
@@ -57,6 +82,14 @@ void() func_episodegate =
 	self.use = func_wall_use;
 	setmodel(self, self.model);
 };
+
+/*============================================================================
+
+func_bossgate
+
+This bmodel appears unless players have all of the episode sigils.
+
+============================================================================*/
 
 void() func_bossgate =
 {

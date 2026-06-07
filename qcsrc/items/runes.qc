@@ -47,6 +47,14 @@ void() sigil_touch =
 	SUB_UseTargets();
 };
 
+/*============================================================================
+
+item_sigil
+
+End of level sigil, pick up to end episode and return to start.
+
+============================================================================*/
+
 void() item_sigil =
 {
 	if (!self.spawnflags)
