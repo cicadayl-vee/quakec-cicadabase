@@ -25,8 +25,8 @@ TELEPORT TRIGGERS
 
 entity s;
 
-float SPAWNFLAG_PLAYER_ONLY = 1;
-float SPAWNFLAG_NO_AMBIENCE = 2;
+float SPAWNFLAG_TELE_PLAYER_ONLY = 1;
+float SPAWNFLAG_TELE_NO_AMBIENCE = 2;
 
 void() play_teleport =
 {
@@ -34,21 +34,20 @@ void() play_teleport =
 	string tmpstr;
 
 	v = random() * 5;
-		
 	if (v < 1)
-		tmpstr = "temp/r_tele1.wav";
+		tmpstr = "misc/r_tele1.wav";
 	else if (v < 2)
-		tmpstr = "temp/r_tele2.wav";
+		tmpstr = "misc/r_tele2.wav";
 	else if (v < 3)
-		tmpstr = "temp/r_tele3.wav";
+		tmpstr = "misc/r_tele3.wav";
 	else if (v < 4)
-		tmpstr = "temp/r_tele4.wav";
+		tmpstr = "misc/r_tele4.wav";
 	else
-		tmpstr = "temp/r_tele5.wav";
-			
+		tmpstr = "misc/r_tele5.wav";
+
 	sound(self, CHAN_VOICE, tmpstr, 1, ATTN_NORM);
 	remove(self);
-}
+};
 
 void(vector org) spawn_tfog =
 {
@@ -62,16 +61,37 @@ void(vector org) spawn_tfog =
 	WriteCoord(MSG_BROADCAST, org_x);
 	WriteCoord(MSG_BROADCAST, org_y);
 	WriteCoord(MSG_BROADCAST, org_z);
-}
+};
 
 void() tdeath_touch =
 {
+	entity other2;
+	
 	if (other == self.owner)
 		return;
 
 	// frag anyone who teleports in on top of an invincible player
 	if (other.classname == "player")
-	{	
+	{
+		if (other.invincible_finished > time && self.owner.invincible_finished > time) 
+		{
+			self.classname = "teledeath3";
+			other.invincible_finished = 0;
+			self.owner.invincible_finished = 0;
+			T_Damage (other, self, self, 50000);
+			other2 = self.owner;
+			self.owner = other;
+			T_Damage (other2, self, self, 50000);
+			return;
+		}
+		
+		if (other.invincible_finished > time)
+		{
+			self.classname = "teledeath2";
+			T_Damage (self.owner, self, self, 50000);
+			return;
+		}
+		
 		if (self.owner.classname != "player")
 		{
 			// other monsters explode themselves
@@ -81,10 +101,8 @@ void() tdeath_touch =
 	}
 
 	if (other.health)
-	{
 		T_Damage(other, self, self, 50000);
-	}
-}
+};
 
 void(vector org, entity death_owner) spawn_tdeath =
 {
@@ -104,7 +122,7 @@ void(vector org, entity death_owner) spawn_tdeath =
 
 	// make sure even still objects get hit
 	force_retouch = 2;
-}
+};
 
 void() teleport_touch =
 {
@@ -118,7 +136,7 @@ void() teleport_touch =
 			return;
 	}
 
-	if (self.spawnflags & SPAWNFLAG_PLAYER_ONLY)
+	if (self.spawnflags & SPAWNFLAG_TELE_PLAYER_ONLY)
 	{
 		if (other.classname != "player")
 			return;
@@ -154,7 +172,6 @@ void() teleport_touch =
 
 	setorigin(other, t.origin);
 	other.angles = t.mangle;
-	
 	if (other.classname == "player")
 	{
 		// turn this way immediately
@@ -164,15 +181,8 @@ void() teleport_touch =
 			other.flags = other.flags - FL_ONGROUND;
 		other.velocity = v_forward * 300;
 	}
-	
 	other.flags = other.flags - other.flags & FL_ONGROUND;
-}
-
-/*============================================================================
-
-info_teleport_destination
-
-============================================================================*/
+};
 
 void() info_teleport_destination =
 {
@@ -183,7 +193,7 @@ void() info_teleport_destination =
 	self.origin = self.origin + '0 0 27';
 	if (!self.targetname)
 		objerror("no targetname");
-}
+};
 
 void() teleport_use =
 {
@@ -191,22 +201,11 @@ void() teleport_use =
 	// make sure even still objects get hit
 	force_retouch = 2;
 	self.think = SUB_Null;
-}
-
-/*============================================================================
-
-trigger_teleport
-
-============================================================================*/
+};
 
 void() trigger_teleport =
 {
 	vector o;
-	
-	if (!self.noise1)
-		self.noise1 = "misc/null.wav";
-		
-	precache_sound(self.noise1);
 
 	InitTrigger();
 	self.touch = teleport_touch;
@@ -215,9 +214,10 @@ void() trigger_teleport =
 		objerror("no target");
 	self.use = teleport_use;
 
-	if (!(self.spawnflags & SPAWNFLAG_NO_AMBIENCE))
+	if (!(self.spawnflags & SPAWNFLAG_TELE_NO_AMBIENCE))
 	{
+		precache_sound("ambience/hum1.wav");
 		o = (self.mins + self.maxs) * 0.5;
-		ambientsound(o, self.noise1, 0.5, ATTN_STATIC);
+		ambientsound(o, "ambience/hum1.wav", 0.5, ATTN_STATIC);
 	}
-}
+};
