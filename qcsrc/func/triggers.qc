@@ -442,7 +442,7 @@ void() trigger_push_touch =
 
 /*============================================================================
 
-trigger_hurt
+trigger_push
 
 Pushes the player.
 Use "360" for an angle of 0.
