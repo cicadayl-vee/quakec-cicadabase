@@ -60,7 +60,7 @@ Checks for taking off health points from a player that recently used a Mega-Heal
 
 ============================================================================*/
 
-void CheckHealthRot() 
+void() CheckHealthRot =
 {
 	if (!(self.items & IT_SUPERHEALTH)) 
 		return;

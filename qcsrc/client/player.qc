@@ -888,7 +888,7 @@ void() PlayerPostThink =
 	{
 		if (self.watertype == CONTENT_WATER)
 			sound(self, CHAN_BODY, "player/h2ojump.wav", 1, ATTN_NORM);
-		else if (self.jump_flag < -650)
+		else if ((self.jump_flag < -650) && (self.waterlevel == 0))
 		{
 			self.deathtype = "falling";
 			T_Damage(self, world, world, 5);
