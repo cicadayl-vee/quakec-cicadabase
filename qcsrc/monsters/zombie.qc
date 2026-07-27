@@ -63,8 +63,6 @@ $frame cruc_1 cruc_2 cruc_3 cruc_4 cruc_5 cruc_6
 
 //============================================================================
 
-float SPAWN_CRUCIFIED = 1;
-
 void() zombie_stand1 = [ $stand1, zombie_stand2 ] { ai_stand(); };
 void() zombie_stand2 = [ $stand2, zombie_stand3 ] { ai_stand(); };
 void() zombie_stand3 = [ $stand3, zombie_stand4 ] { ai_stand(); };

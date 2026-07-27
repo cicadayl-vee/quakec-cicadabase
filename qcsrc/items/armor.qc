@@ -38,18 +38,21 @@ void() armor_touch =
 		value = 100;
 		bit = IT_ARMOR1;
 	}
+	
 	if (self.classname == "item_armor2")
 	{
 		type = 0.6;
 		value = 150;
 		bit = IT_ARMOR2;
 	}
+	
 	if (self.classname == "item_armorInv")
 	{
 		type = 0.8;
 		value = 200;
 		bit = IT_ARMOR3;
 	}
+	
 	if (other.armortype * other.armorvalue >= type * value)
 		return;
 

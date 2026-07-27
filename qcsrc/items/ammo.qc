@@ -23,12 +23,6 @@ AMMO
 
 ============================================================================*/
 
-float SPAWNFLAG_WEAPON_BIG2 = 1;
-float SPAWNFLAG_WEAPON_SHOTGUN = 1;
-float SPAWNFLAG_WEAPON_ROCKET = 2;
-float SPAWNFLAG_WEAPON_SPIKES = 4;
-float SPAWNFLAG_WEAPON_BIG = 8;
-
 void() bound_other_ammo =
 {
 	if (other.ammo_shells > 100)
@@ -73,6 +67,7 @@ void(float old, float new) Deathmatch_Weapon =
 	// change self.weapon if desired
 	or = RankForWeapon(self.weapon);
 	nr = RankForWeapon(new);
+	
 	if (nr < or)
 		self.weapon = new;
 };

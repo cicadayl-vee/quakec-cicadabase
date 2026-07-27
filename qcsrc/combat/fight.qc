@@ -230,6 +230,7 @@ void() ai_melee_side =
 		return;
 	if (!CanDamage(self.enemy, self))
 		return;
+	
 	ldmg = (random() + random() + random()) * 3;
 	T_Damage(self.enemy, self, self, ldmg);
 };

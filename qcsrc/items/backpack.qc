@@ -75,6 +75,7 @@ void() BackpackTouch =
 		sprint (other, s);
 		sprint (other, " shells");
 	}
+	
 	if (self.ammo_nails)
 	{
 		if (acount)
@@ -84,6 +85,7 @@ void() BackpackTouch =
 		sprint (other, s);
 		sprint (other, " nails");
 	}
+	
 	if (self.ammo_rockets)
 	{
 		if (acount)
@@ -93,6 +95,7 @@ void() BackpackTouch =
 		sprint (other, s);
 		sprint (other, " rockets");
 	}
+	
 	if (self.ammo_cells)
 	{
 		if (acount)
@@ -139,6 +142,7 @@ void() DropBackpack =
 	item.origin = self.origin - '0 0 24';
 
 	item.items = self.weapon;
+	
 	if (item.items == IT_AXE)
 		item.netname = "Axe";
 	else if (item.items == IT_SHOTGUN)

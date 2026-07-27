@@ -47,9 +47,7 @@ void() W_ChangeWeapon =
 	am = 0;
 
 	if (self.impulse == 1)
-	{
 		fl = IT_AXE;
-	}
 	else if (self.impulse == 2)
 	{
 		fl = IT_SHOTGUN;

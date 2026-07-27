@@ -23,9 +23,6 @@ HEALTH
 
 ============================================================================*/
 
-float SPAWNFLAG_HEATH_ROTTEN = 1;
-float SPAWNFLAG_HEATH_MEGA = 2;
-
 /*============================================================================
 
 T_Heal
@@ -41,14 +38,16 @@ float(entity e, float healamount, float ignore) T_Heal =
 		return 0;
 	if ((!ignore) && (e.health >= other.max_health))
 		return 0;
+	
 	healamount = ceil(healamount);
-
 	e.health = e.health + healamount;
+	
 	if ((!ignore) && (e.health >= other.max_health))
 		e.health = other.max_health;
 
 	if (e.health > 250)
 		e.health = 250;
+	
 	return 1;
 };
 
@@ -123,14 +122,10 @@ void() health_touch =
 	// deathmatch 2 is silly old rules
 	if ( deathmatch && deathmatch != 2 ) 
 	{	
-		if ( self.healtype == 2 ) 
-		{
+		if (self.healtype == 2) 
 			self.nextthink = time + 120;
-		} 
 		else 
-		{
 			self.nextthink = time + 20;
-		}
 	}
 
 	self.think = SUB_regen;
@@ -183,6 +178,7 @@ void() item_health =
 		self.healamount = 25;
 		self.healtype = 1;
 	}
+	
 	setsize(self, '0 0 0', '32 32 56');
 	StartItem();
 };

@@ -1,18 +1,46 @@
 ../progs.dat	// default: ../progs.dat
 
-defs.qc
-subs.qc
-precache.qc
-world.qc
+/*============================================================================
 
-// combat
+DEFS
+
+============================================================================*/
+
+defs/global.qc
+defs/constant.qc
+defs/builtin.qc
+defs/prototypes.qc
+defs/spawnflags.qc
+
+/*============================================================================
+
+SYSTEM
+
+============================================================================*/
+
+sys/subs.qc
+sys/math.qc
+sys/precache.qc
+sys/world.qc
+
+/*============================================================================
+
+COMBAT
+
+============================================================================*/
+
 combat/fight.qc
 combat/ai.qc
 combat/damage.qc	// originally called combat.qc
 combat/monsters.qc
 combat/blood.qc		// blood and gibs - moved from weapons and player code
 
-// items
+/*============================================================================
+
+ITEMS
+
+============================================================================*/
+
 items/item_func.qc
 items/health.qc
 items/armor.qc
@@ -22,36 +50,92 @@ items/runes.qc
 items/powerups.qc
 items/backpack.qc
 
-// weapons
+/*============================================================================
+
+WEAPONS
+
+============================================================================*/
+
 weapons/axe.qc
 weapons/shotguns.qc
 weapons/nailguns.qc
 weapons/launchers.qc
 weapons/thunderbolt.qc
 weapons/weapon_use.qc
-weapons/impulse.qc
 
-// func
-func/walls.qc
-func/doors.qc
-func/buttons.qc
-func/plats.qc
-func/trains.qc
-func/intermission.qc
-func/triggers.qc
-func/teleporters.qc
-func/traps.qc
-func/lights.qc
-func/ambient.qc
-func/enviroment.qc
-func/misc.qc
+weapons/impulses/changeweapon.qc
+weapons/impulses/cheats.qc
+weapons/impulses/dev.qc
+weapons/impulses/impulse_cmd.qc
 
-// client
-client/spawn.qc
+/*============================================================================
+
+FUNC
+
+============================================================================*/
+
+// bmodels
+func/bmodels/walls/wall.qc
+func/bmodels/walls/illusionary.qc
+func/bmodels/walls/episodegate.qc
+func/bmodels/walls/bossgate.qc
+
+func/bmodels/buttons/button.qc
+
+func/bmodels/doors/door.qc
+func/bmodels/doors/secret_door.qc
+
+func/bmodels/plats/plat.qc
+
+func/bmodels/trains/train.qc
+func/bmodels/trains/tele_train.qc
+
+// triggers
+func/triggers/brush/multiple.qc
+func/triggers/brush/teleport.qc
+func/triggers/brush/hurt.qc
+func/triggers/brush/push.qc
+func/triggers/brush/monsterjump.qc
+func/triggers/brush/changelevel.qc
+func/triggers/brush/setskill.qc
+func/triggers/brush/onlyreg.qc
+
+func/triggers/point/relay.qc
+func/triggers/point/counter.qc
+
+// entities
+func/entities/lights.qc
+func/entities/ambient.qc
+func/entities/intermission.qc
+func/entities/misc.qc
+
+func/entities/env/bubbles.qc
+func/entities/env/fireballs.qc
+
+func/entities/traps/shooters.qc
+func/entities/traps/explobox.qc
+
+/*============================================================================
+
+CLIENT
+
+============================================================================*/
+
+client/connect.qc
+client/rules.qc
 client/obituary.qc
-client/player.qc	// bulk of client was moved here
 
-// monsters
+client/player/actions.qc
+client/player/move.qc
+client/player/death.qc
+client/player/think.qc
+
+/*============================================================================
+
+MONSTERS
+
+============================================================================*/
+
 monsters/ogre.qc
 monsters/demon.qc
 monsters/shambler.qc

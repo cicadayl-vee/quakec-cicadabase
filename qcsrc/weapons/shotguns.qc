@@ -44,6 +44,7 @@ void() ApplyMultiDamage =
 {
 	if (!multi_ent)
 		return;
+	
 	T_Damage(multi_ent, self, self, multi_damage);
 };
 
@@ -113,6 +114,7 @@ void(float shotcount, vector dir, vector spread) FireBullets =
 	src_z = self.absmin_z + self.size_z * 0.7;
 
 	ClearMultiDamage();
+	
 	while (shotcount > 0)
 	{
 		direction = dir + crandom() * spread_x * v_right + crandom() * spread_y * v_up;
@@ -123,6 +125,7 @@ void(float shotcount, vector dir, vector spread) FireBullets =
 
 		shotcount = shotcount - 1;
 	}
+	
 	ApplyMultiDamage();
 };
 

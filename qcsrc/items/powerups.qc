@@ -28,7 +28,6 @@ float modelindex_eyes, modelindex_player;
 void() powerup_touch =
 {
 	if (other.classname != "player")
-
 		return;
 	if (other.health <= 0)
 		return;
@@ -140,10 +139,8 @@ void() CheckPowerups =
 		self.modelindex = modelindex_eyes;
 	}
 	else
-	{
 		// don't use eyes
 		self.modelindex = modelindex_player;
-	}
 
 	// invincibility
 	if (self.invincible_finished)
@@ -173,6 +170,7 @@ void() CheckPowerups =
 			self.invincible_time = 0;
 			self.invincible_finished = 0;
 		}
+		
 		if (self.invincible_finished > time)
 			self.effects = self.effects | EF_DIMLIGHT;
 		else
@@ -208,6 +206,7 @@ void() CheckPowerups =
 			self.super_damage_finished = 0;
 			self.super_time = 0;
 		}
+		
 		if (self.super_damage_finished > time)
 			self.effects = self.effects | EF_DIMLIGHT;
 		else

@@ -23,8 +23,6 @@ BLOOD AND GIBS
 
 ============================================================================*/
 
-float() crandom = { return 2 * (random() - 0.5); };
-
 vector() wall_velocity =
 {
 	vector vel;
@@ -42,6 +40,7 @@ vector() wall_velocity =
 SpawnMeatSpray
 
 ============================================================================*/
+
 void(vector org, vector vel) SpawnMeatSpray =
 {
 	entity missile;
@@ -98,15 +97,11 @@ vector(float dm) VelocityForDamage =
 	v_z = 200 + 100 * random();
 
 	if (dm > -50)
-	{
-		//dprint("level 1\n");
+		// dprint("level 1\n");
 		v = v * 0.7;
-	}
 	else if (dm > -200)
-	{
-		//dprint("level 3\n");
+		// dprint("level 3\n");
 		v = v * 2;
-	}
 	else
 		v = v * 10;
 

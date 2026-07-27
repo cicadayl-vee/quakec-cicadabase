@@ -50,11 +50,10 @@ void(vector p1, vector p2, entity from, float damage) LightningDamage =
 	{
 		particle(trace_endpos, '0 0 100', 225, damage * 4);
 		T_Damage(trace_ent, from, from, damage);
+		
 		if (self.classname == "player")
-		{
 			if (other.classname == "player")
 				trace_ent.velocity_z = trace_ent.velocity_z + 400;
-		}
 	}
 	e1 = trace_ent;
 
@@ -107,6 +106,7 @@ void() W_FireLightning =
 		sound(self, CHAN_WEAPON, "weapons/lhit.wav", 1, ATTN_NORM);
 		self.t_width = time + 0.6;
 	}
+	
 	self.punchangle_x = -2;
 
 	self.currentammo = self.ammo_cells = self.ammo_cells - 1;

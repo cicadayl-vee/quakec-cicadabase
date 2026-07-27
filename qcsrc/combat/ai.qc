@@ -58,15 +58,6 @@ will wake up even if they wouldn't have noticed the player
 
 ============================================================================*/
 
-float(float v) anglemod =
-{
-	while (v >= 360)
-		v = v - 360;
-	while (v < 0)
-		v = v + 360;
-	return v;
-};
-
 /*============================================================================
 
 movetarget_f
@@ -104,10 +95,7 @@ Monsters will continue walking towards the next target corner.
 
 ============================================================================*/
 
-void() path_corner =
-{
-	movetarget_f();
-};
+void() path_corner = { movetarget_f(); };
 
 /*============================================================================
 
@@ -137,9 +125,10 @@ void() t_movetarget =
 	if (self.classname == "monster_ogre")
 		sound(self, CHAN_AUTO, "ogre/ogdrag.wav", 1, ATTN_IDLE);
 
-	//dprint("t_movetarget\n");
+	// dprint("t_movetarget\n");
 	self.goalentity = self.movetarget = find(world, targetname, other.target);
 	self.ideal_yaw = vectoyaw(self.goalentity.origin - self.origin);
+	
 	if (!self.movetarget)
 	{
 		self.pausetime = time + 999999;
@@ -169,12 +158,14 @@ float(entity targ) range =
 	spot2 = targ.origin + targ.view_ofs;
 
 	r = vlen(spot1 - spot2);
+	
 	if (r < 120)
 		return RANGE_MELEE;
 	if (r < 500)
 		return RANGE_NEAR;
 	if (r < 1000)
 		return RANGE_MID;
+	
 	return RANGE_FAR;
 };
 
@@ -224,9 +215,7 @@ float(entity targ) infront =
 	dot = vec * v_forward;
 
 	if (dot > 0.3)
-	{
 		return TRUE;
-	}
 
 	return FALSE;
 };
@@ -239,6 +228,7 @@ void() HuntTarget =
 	self.think = self.th_run;
 	self.ideal_yaw = vectoyaw(self.enemy.origin - self.origin);
 	self.nextthink = time + 0.1;
+	
 	// wait a while before first attack
 	SUB_AttackFinished(1);
 };
@@ -648,6 +638,7 @@ void(float dist) ai_run =
 
 	// check knowledge of enemy
 	enemy_vis = visible(self.enemy);
+	
 	if (enemy_vis)
 		self.search_time = time + 5;
 
@@ -668,6 +659,7 @@ void(float dist) ai_run =
 		ai_run_missile();
 		return;
 	}
+	
 	if (self.attack_state == AS_MELEE)
 	{
 		//dprint("ai_run_melee\n");

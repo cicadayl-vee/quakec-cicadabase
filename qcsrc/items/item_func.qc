@@ -27,13 +27,10 @@ void() SUB_regen =
 {
 	// restore original model
 	self.model = self.mdl;
-
 	// allow it to be touched again
 	self.solid = SOLID_TRIGGER;
-
 	// play respawn sound
 	sound(self, CHAN_VOICE, "items/itembk2.wav", 1, ATTN_NORM);
-
 	setorigin(self, self.origin);
 };
 
@@ -74,6 +71,7 @@ void() PlaceItem =
 	self.velocity = '0 0 0';
 	self.origin_z = self.origin_z + 6;
 	oldz = self.origin_z;
+	
 	if (!droptofloor())
 	{
 		dprint("Bonus item fell out of level at ");

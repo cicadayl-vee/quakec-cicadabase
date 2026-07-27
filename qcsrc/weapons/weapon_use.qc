@@ -202,13 +202,9 @@ void() W_Attack =
 		self.attack_finished = time + 0.7;
 	}
 	else if (self.weapon == IT_NAILGUN)
-	{
 		player_nail1();
-	}
 	else if (self.weapon == IT_SUPER_NAILGUN)
-	{
 		player_nail1();
-	}
 	else if (self.weapon == IT_GRENADE_LAUNCHER)
 	{
 		player_rocket1();
