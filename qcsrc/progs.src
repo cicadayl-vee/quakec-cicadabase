@@ -63,10 +63,16 @@ weapons/launchers.qc
 weapons/thunderbolt.qc
 weapons/weapon_use.qc
 
-weapons/impulses/changeweapon.qc
-weapons/impulses/cheats.qc
-weapons/impulses/dev.qc
-weapons/impulses/impulse_cmd.qc
+/*============================================================================
+
+IMPULSE COMMANDS
+
+============================================================================*/
+
+impulses/changeweapon.qc
+impulses/cheats.qc
+impulses/dev.qc
+impulses/impulse_use.qc
 
 /*============================================================================
 
